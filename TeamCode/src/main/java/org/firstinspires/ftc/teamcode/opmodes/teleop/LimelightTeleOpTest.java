@@ -9,17 +9,19 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 public class LimelightTeleOpTest extends LinearOpMode {
-    @Override
-    public void runOpMode() throws InterruptedException{
-
-
-    }
     public void init_limelight(){
         //Config here (limelight is not what it is configuired as yet in the control hub)
         Limelight3A crashlimelight = hardwareMap.get(Limelight3A.class, "limelight");
         crashlimelight.setPollRateHz(100); //How many times a second we ask for data
         crashlimelight.start();
     }
+    @Override
+    public void runOpMode() throws InterruptedException{
+
+
+
+    }
+
 
 
 }
