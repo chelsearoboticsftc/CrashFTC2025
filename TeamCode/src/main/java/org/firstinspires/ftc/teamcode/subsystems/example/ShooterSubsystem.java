@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode.subsystems.example;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 public class ShooterSubsystem {
 
     //Declare HW objects here
@@ -11,6 +13,7 @@ public class ShooterSubsystem {
     //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx motorName;
 
+    DcMotor FlyWheelMotorBot = HardwareMap(DcMotorEx.class,"FlyMotorBot");
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
     private double motorPower = 0;
@@ -27,6 +30,9 @@ public class ShooterSubsystem {
 
         //Example code defining a DcMotor object to a motor in the config called "motorName"
         this.motorName = hardwareMap.get(DcMotorEx.class,"motorName");
+
+
+
 
         //This defines the behavior at zero power (brake or coast)
         motorName.setZeroPowerBehavior(SampleSubsystemConstants.MOTOR_NAME_ZERO_POWER_BEHAVIOR);
@@ -67,6 +73,10 @@ public class ShooterSubsystem {
         //motorName.setTargetPosition(motorSetPosition);
     }
 
+   public void shooterMotor(){
+   // Add something
+
+   }
     public void setMotorPosition(int position){
         //Call this method when you want to change the motor set position
         motorSetPosition = position;
@@ -88,7 +98,7 @@ public class ShooterSubsystem {
 
     //Use convention "set<Parameter>" to name methods which set something. Example set<motorName>Power
     public void setMotorPower(double power){
-        //Note: Calling setPower stops position and Velocity control!!!!
+        //Note: Calling setPower stops position hand Velocity control!!!!
         motorPower = power;
         motorName.setPower(power);
     }
