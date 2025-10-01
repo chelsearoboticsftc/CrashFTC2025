@@ -11,9 +11,10 @@ public class ShooterSubsystem {
     //Declare HW objects here
 
     //Example declare a DcMotorEx object as part of this class called 'motorName'
-    DcMotorEx motorName;
+    DcMotorEx flyWheelMotorTop;
+    DcMotorEx flyWheelMotorBottom;
 
-    DcMotor FlyWheelMotorBot = HardwareMap(DcMotorEx.class,"FlyMotorBot");
+
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
     private double motorPower = 0;
@@ -29,31 +30,31 @@ public class ShooterSubsystem {
         //configuration exactly.  This is the connection with the Control Hub Config
 
         //Example code defining a DcMotor object to a motor in the config called "motorName"
-        this.motorName = hardwareMap.get(DcMotorEx.class,"motorName");
-
+        this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"flyWheelMotorTop");
+        this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"flyWheelMotorBottom");
 
 
 
         //This defines the behavior at zero power (brake or coast)
-        motorName.setZeroPowerBehavior(SampleSubsystemConstants.MOTOR_NAME_ZERO_POWER_BEHAVIOR);
+        flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
 
         //This defines the motor direction (forward or reversed)
-        motorName.setDirection(SampleSubsystemConstants.MOTOR_NAME_DIRECTION);
+        motorName.setDirection(ShooterSubsystemConstants.MOTOR_NAME_DIRECTION);
 
         /* This defines the motor velocity PIDF gains.  Velocity PIDF values determine control    *
          * around a target velocity (setTargetVelocity) OR how fast the system responds to a      *
          * change in set position (setTargetPosition).                                            */
         motorName.setVelocityPIDFCoefficients(
-                SampleSubsystemConstants.MOTOR_NAME_VELOCITY_P, //Proportional Gain
-                SampleSubsystemConstants.MOTOR_NAME_VELOCITY_I, //Integral Gain
-                SampleSubsystemConstants.MOTOR_NAME_VELOCITY_D, //Derivative Gain
-                SampleSubsystemConstants.MOTOR_NAME_VELOCITY_F);//Feed Forward Gain
+                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_P, //Proportional Gain
+                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_I, //Integral Gain
+                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_D, //Derivative Gain
+                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_F);//Feed Forward Gain
 
         /* This defines the motor position PID P gain. Position control only needs P gain since   *
          * once the system reaches the target position since once at position you're only         *
          * disturbances in the system                                                             */
         motorName.setPositionPIDFCoefficients(
-                SampleSubsystemConstants.MOTOR_NAME_POSITION_P);//Proportional Gain
+                ShooterSubsystemConstants.MOTOR_NAME_POSITION_P);//Proportional Gain
 
         //motorName.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -83,10 +84,10 @@ public class ShooterSubsystem {
 
         //Call setTargetPositionTolerance to tell REV controller how close to the target position
         //can be considered "at" the target position (e.g. target postion +/- tolerance)
-        motorName.setTargetPositionTolerance(SampleSubsystemConstants.MOTOR_NAME_POSITION_TOLERANCE);
+        motorName.setTargetPositionTolerance(ShooterSubsystemConstants.MOTOR_NAME_POSITION_TOLERANCE);
 
         //Call setVelocity to tell the REV controller how fast you want to get to the target position
-        motorName.setVelocity(SampleSubsystemConstants.MOTOR_NAME_VELOCITY_TICKS_PER_S);
+        motorName.setVelocity(ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_TICKS_PER_S);
 
         //Call setTargetPosition to tell the REV controller the position you want to move to
         motorName.setTargetPosition(motorSetPosition);
