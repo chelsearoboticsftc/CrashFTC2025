@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Gamepad;
 public class ShooterSubsystem {
 
     //Declare HW objects here
@@ -39,22 +40,22 @@ public class ShooterSubsystem {
         flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
 
         //This defines the motor direction (forward or reversed)
-        motorName.setDirection(ShooterSubsystemConstants.MOTOR_NAME_DIRECTION);
+        flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_DIRECTION);
 
         /* This defines the motor velocity PIDF gains.  Velocity PIDF values determine control    *
          * around a target velocity (setTargetVelocity) OR how fast the system responds to a      *
          * change in set position (setTargetPosition).                                            */
-        motorName.setVelocityPIDFCoefficients(
-                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_P, //Proportional Gain
-                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_I, //Integral Gain
-                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_D, //Derivative Gain
-                ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_F);//Feed Forward Gain
+        flyWheelMotorBottom.setVelocityPIDFCoefficients(
+                ShooterSubsystemConstants.FLYWHEEL_VELOCITY_P, //Proportional Gain
+                ShooterSubsystemConstants.FLYWHEEL_VELOCITY_I, //Integral Gain
+                ShooterSubsystemConstants.FLYWHEEL_VELOCITY_D, //Derivative Gain
+                ShooterSubsystemConstants.FLYWHEEL_VELOCITY_F);//Feed Forward Gain
 
         /* This defines the motor position PID P gain. Position control only needs P gain since   *
          * once the system reaches the target position since once at position you're only         *
          * disturbances in the system                                                             */
-        motorName.setPositionPIDFCoefficients(
-                ShooterSubsystemConstants.MOTOR_NAME_POSITION_P);//Proportional Gain
+        flyWheelMotorBottom.setPositionPIDFCoefficients(
+                ShooterSubsystemConstants.FLYWHEEL_POSITION_P);//Proportional Gain
 
         //motorName.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -62,8 +63,7 @@ public class ShooterSubsystem {
     /* Standard functions.  All Chelsea Robotics subsystems shall have init() and update() these  *
      * methods defined. Leave empty if not needed!                                                */
     public void init(){
-        /* Call this method at the start of your opmode logic once to execute any logic you       *
-         * want to be called on initialization. If none, leave empty!                             */
+
     }
 
     public void update(){
@@ -84,34 +84,34 @@ public class ShooterSubsystem {
 
         //Call setTargetPositionTolerance to tell REV controller how close to the target position
         //can be considered "at" the target position (e.g. target postion +/- tolerance)
-        motorName.setTargetPositionTolerance(ShooterSubsystemConstants.MOTOR_NAME_POSITION_TOLERANCE);
+        flyWheelMotorBottom.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
 
         //Call setVelocity to tell the REV controller how fast you want to get to the target position
-        motorName.setVelocity(ShooterSubsystemConstants.MOTOR_NAME_VELOCITY_TICKS_PER_S);
+        flyWheelMotorBottom.setVelocity(ShooterSubsystemConstants.FLYWHEEL_VELOCITY_TICKS_PER_S);
 
         //Call setTargetPosition to tell the REV controller the position you want to move to
-        motorName.setTargetPosition(motorSetPosition);
+        flyWheelMotorBottom.setTargetPosition(motorSetPosition);
 
         //Call setMode(DcMotor.RunMode.RUN_TO_POSITION) to tell the REV controller you're ready to
         //move to position
-        motorName.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        flyWheelMotorBottom.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     //Use convention "set<Parameter>" to name methods which set something. Example set<motorName>Power
     public void setMotorPower(double power){
         //Note: Calling setPower stops position hand Velocity control!!!!
         motorPower = power;
-        motorName.setPower(power);
+        flyWheelMotorBottom.setPower(power);
     }
 
     //Use convention "get<Parameter>" to name methods which return something
     //Example return motorName position
     public int getMotorPosition(){
-        return motorName.getCurrentPosition();
+        return flyWheelMotorBottom.getCurrentPosition();
     }
 
     public int getMotorTargetPosition(){
-        return motorName.getTargetPosition();
+        return flyWheelMotorBottom.getTargetPosition();
     }
 
     public double getMotorPower(){
@@ -121,6 +121,6 @@ public class ShooterSubsystem {
     //Use convention "is<Condition>" to return TRUE/FALSE in response to a logical test
     //Example return TRUE if motor position is greater than a threshold defined in constants
     public boolean isMotorBusy(){
-        return motorName.isBusy();
+        return flyWheelMotorBottom.isBusy();
     }
 }
