@@ -6,12 +6,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Gamepad;
+
 public class ShooterSubsystem {
 
     //Declare HW objects here
 
-    //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx flyWheelMotorTop;
     DcMotorEx flyWheelMotorBottom;
 
@@ -74,9 +73,16 @@ public class ShooterSubsystem {
         //motorName.setTargetPosition(motorSetPosition);
     }
 
-   public void shooterMotor(){
-   // Add something
+   public void runShooter(double power){
+       flyWheelMotorBottom.setPower(power);
+       flyWheelMotorTop.setPower(power);
 
+   }
+   public void runTopShooterMotor(double power){
+       flyWheelMotorTop.setPower(power);
+   }
+   public void runBottomShooterMotor(double power){
+       flyWheelMotorBottom.setPower(power);
    }
     public void setMotorPosition(int position){
         //Call this method when you want to change the motor set position
