@@ -9,18 +9,27 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class ShooterMotorMoveTest extends LinearOpMode {
 
 
-
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();
 
-        while(opModeIsActive()){
+        while (opModeIsActive()) {
             ShooterSubsystem Shooter = new ShooterSubsystem(hardwareMap);
 
-            float trigger_input = gamepad1.right_trigger;
-            Shooter.runTopShooterMotor(trigger_input);
+
+            if (gamepad1.a) {
+                Shooter.runTopShooterMotor(1);
+
+            } else if (gamepad1.b) {
+                Shooter.runBottomShooterMotor(1);
+            } else if (gamepad1.y) {
+                Shooter.runShooter(1);
+            }else{
+                Shooter.runShooter(0);
+            }
+
+
         }
 
     }
-
 }

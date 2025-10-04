@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems.example;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -13,7 +14,7 @@ public class ShooterSubsystem {
 
     DcMotorEx flyWheelMotorTop;
     DcMotorEx flyWheelMotorBottom;
-
+    CRServo HoodServo;
 
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
@@ -30,15 +31,17 @@ public class ShooterSubsystem {
         //configuration exactly.  This is the connection with the Control Hub Config
 
         //Example code defining a DcMotor object to a motor in the config called "motorName"
-        this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"flyWheelMotorTop");
-        this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"flyWheelMotorBottom");
-
+        this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"FW1");
+        this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"FW2");
+        //this.HoodServo = hardwareMap.get(CRServo.class, "Hood");
 
 
         //This defines the behavior at zero power (brake or coast)
         flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
+        flyWheelMotorBottom.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
 
         //This defines the motor direction (forward or reversed)
+        flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_DIRECTION);
         flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_DIRECTION);
 
         /* This defines the motor velocity PIDF gains.  Velocity PIDF values determine control    *
@@ -91,10 +94,10 @@ public class ShooterSubsystem {
         //Call setTargetPositionTolerance to tell REV controller how close to the target position
         //can be considered "at" the target position (e.g. target postion +/- tolerance)
         flyWheelMotorBottom.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
-
+        flyWheelMotorTop.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
         //Call setVelocity to tell the REV controller how fast you want to get to the target position
         flyWheelMotorBottom.setVelocity(ShooterSubsystemConstants.FLYWHEEL_VELOCITY_TICKS_PER_S);
-
+        flyWheelMotorBottom.setVelocity(ShooterSubsystemConstants.FLYWHEEL_VELOCITY_TICKS_PER_S);
         //Call setTargetPosition to tell the REV controller the position you want to move to
         flyWheelMotorBottom.setTargetPosition(motorSetPosition);
 
