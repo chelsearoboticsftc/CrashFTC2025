@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Autonomous
-public class SampleAutonTESTYTEST extends LinearOpMode{
+public class SampleAutonTest extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0,0));
