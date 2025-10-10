@@ -32,14 +32,10 @@ public class SampleAutonRed extends LinearOpMode{
             Pose2d initialPose = new Pose2d(-11.8, -61.7, Math.toRadians(90));
             MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
             //wanted to see if this works without the TrajectoryBuilder object.
+        
             drive.actionBuilder(initialPose)
-                     .waitSeconds(2)
-                    //wait 2 seconds, and then spline to the position (-32, -48), while (I think) we change heading.
-                    //For the other crash programmers, the tangent is basically the change in y over the change in x, as a proportion.
-                    //since roadrunner treats the field as a coordinate grid, I think we use this to turn the robot sometimes.
-                    //We are doing this in the unit radians, where 180 degrees is equal to PI, so Math.PI/2 here just means 90 degrees.
-                    //In theory. This is untested.
-                     .splineTo(new Vector2d(-32, -48), Math.PI/2);
 
+                     .splineTo(new Vector2d(-32, -48), Math.toRadians(90))
+                     .build();
     }
 }
