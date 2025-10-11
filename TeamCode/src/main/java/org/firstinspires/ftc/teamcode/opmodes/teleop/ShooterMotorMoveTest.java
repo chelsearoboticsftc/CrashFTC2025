@@ -18,12 +18,12 @@ public class ShooterMotorMoveTest extends LinearOpMode {
 
 
             if (gamepad1.a) {
-                Shooter.runTopShooterMotor(1);
+                Shooter.runTopShooterMotor(-1);
 
             } else if (gamepad1.b) {
-                Shooter.runBottomShooterMotor(1);
+                Shooter.runBottomShooterMotor(-1);
             } else if (gamepad1.y) {
-                Shooter.runShooter(1);
+                Shooter.runShooter(-1);
             }else{
                 Shooter.runShooter(0);
             }
