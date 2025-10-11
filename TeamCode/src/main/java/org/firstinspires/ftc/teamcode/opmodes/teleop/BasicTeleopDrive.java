@@ -4,6 +4,8 @@ import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
@@ -16,8 +18,19 @@ public class BasicTeleopDrive extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0,0));
 
         waitForStart();
+        double distance;
 
         while(opModeIsActive()){
+           //Start of Rob's vision
+            SampleVision GoalDistance = new SampleVision(hardwareMap);
+
+                distance = GoalDistance.getDistanceToGoal(20);
+                //20 equals BLUE team
+                telemetry.addLine(String.format("range %6.1f inch",
+                        distance));
+                telemetry.update();
+                sleep(5000);
+            //End of Rob's vision
             ShooterSubsystem Shooter = new ShooterSubsystem(hardwareMap);
             drive.setDrivePowers(
                     new PoseVelocity2d(
