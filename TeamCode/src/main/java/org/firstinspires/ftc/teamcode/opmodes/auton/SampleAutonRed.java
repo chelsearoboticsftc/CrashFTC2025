@@ -19,6 +19,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.tuning.TuningOpModes;
 
 @Autonomous
 public class SampleAutonRed extends LinearOpMode{
@@ -27,15 +28,14 @@ public class SampleAutonRed extends LinearOpMode{
 
         waitForStart();
 
-
-
             // instantiate your MecanumDrive at a particular pose.
-            Pose2d initialPose = new Pose2d(11.8, 61.7, Math.toRadians(90));
+            Pose2d initialPose = new Pose2d(-11.8, -61.7, Math.toRadians(90));
             MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-            TrajectoryActionBuilder tab1 = drive.actionBuilder(initialPose)
-                     .waitSeconds(2)
-                    .lineToY(48)
-                    .lineToX(32);
+            //wanted to see if this works without the TrajectoryBuilder object.
+        
+            drive.actionBuilder(initialPose)
 
+                     .splineTo(new Vector2d(-32, -48), Math.toRadians(90))
+                     .build();
     }
 }
