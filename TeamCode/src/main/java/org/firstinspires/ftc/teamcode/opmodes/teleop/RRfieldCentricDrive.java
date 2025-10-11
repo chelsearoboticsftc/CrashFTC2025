@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
+
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -19,17 +20,20 @@ public class RRfieldCentricDrive extends LinearOpMode{
         waitForStart();
 
         while(opModeIsActive()) {
-            //update the robot's idea of where we are
-            PoseVelocity2d posEstimate = drive.updatePoseEstimate();
 
-            //get the vector of input
+            //get the Heading
+
+            double heading = 0;
+            heading += gamepad1.right_stick_x;
+
+
+            //manipulate the direction to allways be the direction you input
+            //by subtracting or adding the heading from the vector.
+            //Which ones are being subtracted and added needs to be tested
             Vector2d input = new Vector2d(
-                    -gamepad1.left_stick_y,
-                    -gamepad1.left_stick_x
+                    (-gamepad1.right_stick_x - heading),
+                    (-gamepad1.right_stick_y - heading)
             );
-
-            //manipulate the direction to allways be the direction you input.
-
             PoseVelocity2d powers = new PoseVelocity2d(input, -gamepad1.right_stick_x);
 
 
