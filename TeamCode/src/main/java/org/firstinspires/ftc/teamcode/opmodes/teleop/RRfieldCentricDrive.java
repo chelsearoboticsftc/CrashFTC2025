@@ -24,7 +24,18 @@ public class RRfieldCentricDrive extends LinearOpMode{
             //get the Heading
 
             double heading = 0;
-            heading += gamepad1.right_stick_x;
+            //X is a placeholder value for when the heading needs to be reset,
+            //so we don't mess up the input vectors of the robot
+            // by subtracting a large amount from them.
+            //needs changing
+            double x = 0;
+            heading -= gamepad1.right_stick_x;
+            if(heading == x ){
+                heading = 0;
+            }
+            if(heading == -x){
+                heading = 0;
+            }
 
 
             //manipulate the direction to allways be the direction you input
