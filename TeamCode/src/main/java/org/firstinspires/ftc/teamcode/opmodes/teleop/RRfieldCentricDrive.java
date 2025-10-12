@@ -16,29 +16,27 @@ public class RRfieldCentricDrive extends LinearOpMode{
     public void runOpMode() throws InterruptedException{
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        //get the Heading
 
-        waitForStart();
+        double heading = 0;
+        double base_heading = 2*Math.PI;
+
+
 
         while(opModeIsActive()) {
 
-            //get the Heading
+            waitForStart();
 
-            double heading = 0;
-            //X is a placeholder value for when the heading needs to be reset,
-            //so we don't mess up the input vectors of the robot
-            // by subtracting a large amount from them.
-            //needs changing
-            double x = 0;
             heading -= gamepad1.right_stick_x;
-            if(heading == x ){
-                heading = 0;
-            }
-            if(heading == -x){
-                heading = 0;
+
+            //check if the robot has done a 360
+            if(Math.toRadians(heading) > 2*base_heading ){
+                heading -= Math.toDegrees(2*base_heading);
             }
 
 
-            //manipulate the direction to allways be the direction you input
+
+            //manipulate the direction to always be the direction you input
             //by subtracting or adding the heading from the vector.
             //Which ones are being subtracted and added needs to be tested
             Vector2d input = new Vector2d(
