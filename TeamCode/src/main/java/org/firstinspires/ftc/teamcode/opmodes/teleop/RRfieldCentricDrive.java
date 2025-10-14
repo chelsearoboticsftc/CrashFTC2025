@@ -40,8 +40,8 @@ public class RRfieldCentricDrive extends LinearOpMode{
             //by subtracting or adding the heading from the vector.
             //Which ones are being subtracted and added needs to be tested
             Vector2d input = new Vector2d(
-                    (-gamepad1.right_stick_x - heading),
-                    (-gamepad1.right_stick_y - heading)
+                    (-gamepad1.left_stick_x - heading),
+                    (-gamepad1.left_stick_y - heading)
             );
             PoseVelocity2d powers = new PoseVelocity2d(input, -gamepad1.right_stick_x);
 
