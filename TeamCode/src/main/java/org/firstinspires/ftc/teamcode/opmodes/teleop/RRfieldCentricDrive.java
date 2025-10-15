@@ -3,9 +3,12 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
@@ -18,30 +21,29 @@ public class RRfieldCentricDrive extends LinearOpMode{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         //get the Heading
 
-        double heading = 0;
-        double base_heading = 2*Math.PI;
 
 
+        IMU imu = hardwareMap.get(IMU.class, "imu");
 
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
+
+        imu.initialize(parameters);
+
+        waitForStart();
         while(opModeIsActive()) {
 
-            waitForStart();
-
-            heading -= gamepad1.right_stick_x;
-
-            //check if the robot has done a 360
-            if(Math.toRadians(heading) > 2*base_heading ){
-                heading -= Math.toDegrees(2*base_heading);
-            }
-
+            double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
 
             //manipulate the direction to always be the direction you input
-            //by subtracting or adding the heading from the vector.
-            //Which ones are being subtracted and added needs to be tested
+
+            double negativeHeading = -botHeading;
+
             Vector2d input = new Vector2d(
-                    (-gamepad1.left_stick_x - heading),
-                    (-gamepad1.left_stick_y - heading)
+                    (gamepad1.left_stick_y),
+                    (gamepad1.left_stick_x)
             );
             PoseVelocity2d powers = new PoseVelocity2d(input, -gamepad1.right_stick_x);
 
