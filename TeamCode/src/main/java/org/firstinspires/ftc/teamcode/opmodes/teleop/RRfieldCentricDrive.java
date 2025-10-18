@@ -21,29 +21,26 @@ public class RRfieldCentricDrive extends LinearOpMode{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         //get the Heading
 
-
-
-        IMU imu = hardwareMap.get(IMU.class, "imu");
-
-        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
-
-        imu.initialize(parameters);
-
         waitForStart();
+
         while(opModeIsActive()) {
 
-            double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            drive.updatePoseEstimate();
+            Pose2d pose = drive.localizer.getPose();
+            double x_pos = pose.position.x;
+            double y_pos = pose.position.y;
+            double heading = pose.heading.toDouble();
+            double xInput = -gamepad1.left_stick_y;
+            double yInput = -gamepad1.left_stick_x;
 
+            double new_x, new_y;
+            new_x = xInput * Math.cos(heading) - yInput * Math.sin(heading);
+            new_y = xInput * Math.sin(heading) + yInput * Math.cos(heading);
 
-            //manipulate the direction to always be the direction you input
-
-            double negativeHeading = -botHeading;
 
             Vector2d input = new Vector2d(
-                    (gamepad1.left_stick_y),
-                    (gamepad1.left_stick_x)
+                    (new_x),
+                    (new_y)
             );
             PoseVelocity2d powers = new PoseVelocity2d(input, -gamepad1.right_stick_x);
 
@@ -51,6 +48,13 @@ public class RRfieldCentricDrive extends LinearOpMode{
             drive.setDrivePowers(
                     powers
             );
+
+
+            telemetry.addData("x position", x_pos);
+            telemetry.addData("y position", y_pos);
+            telemetry.addData("heading", Math.toDegrees(heading));
+            telemetry.update();
+
         }
 
     }

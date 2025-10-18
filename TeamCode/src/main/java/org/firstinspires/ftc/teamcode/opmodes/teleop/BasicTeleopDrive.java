@@ -22,14 +22,14 @@ public class BasicTeleopDrive extends LinearOpMode {
 
         while(opModeIsActive()){
            //Start of Rob's vision
-            SampleVision GoalDistance = new SampleVision(hardwareMap);
+           /* SampleVision GoalDistance = new SampleVision(hardwareMap);
 
                 distance = GoalDistance.getDistanceToGoal(20);
                 //20 equals BLUE team
                 telemetry.addLine(String.format("range %6.1f inch",
                         distance));
                 telemetry.update();
-                sleep(5000);
+                sleep(5000);*/
             //End of Rob's vision
             ShooterSubsystem Shooter = new ShooterSubsystem(hardwareMap);
             drive.setDrivePowers(
@@ -39,7 +39,10 @@ public class BasicTeleopDrive extends LinearOpMode {
                             -gamepad2.right_stick_x));
             if(gamepad1.a){
                 Shooter.runShooter(-1);
-            }else{
+
+            }if(gamepad1.b){
+                Shooter.aim(50, .5);
+            }else {
                 Shooter.runShooter(0);
             }
         }
