@@ -82,13 +82,9 @@ public class ShooterSubsystem {
         //setTargetPosition needs to be called once per loop to keep the REV watchdog happy
         //motorName.setTargetPosition(motorSetPosition);
     }
-    public void aim(double ticks, double power){
+    public void aim(double power){
 
-            this.turret.setPower(power);
-            encoder_position = this.turret.getCurrentPosition();
-
-
-
+            turret.setPower(power);
     }
    public void runShooter(double power){
        flyWheelMotorBottom.setPower(power);

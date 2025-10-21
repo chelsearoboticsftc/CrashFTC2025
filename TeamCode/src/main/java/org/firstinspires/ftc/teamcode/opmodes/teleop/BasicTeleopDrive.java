@@ -41,7 +41,7 @@ public class BasicTeleopDrive extends LinearOpMode {
                 Shooter.runShooter(-1);
 
             }if(gamepad1.b){
-                Shooter.aim(50, .5);
+                Shooter.aim(0.1);
             }else {
                 Shooter.runShooter(0);
             }

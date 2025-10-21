@@ -34,9 +34,15 @@ public class RRfieldCentricDrive extends LinearOpMode{
             double yInput = -gamepad1.left_stick_x;
 
             double new_x, new_y;
-            new_x = xInput * Math.cos(heading) - yInput * Math.sin(heading);
-            new_y = xInput * Math.sin(heading) + yInput * Math.cos(heading);
 
+            //can be changed to robot oriented if you change fieldOriented in MecanumDrive
+            if (drive.PARAMS.fieldOriented) {
+                new_x = xInput * Math.cos(heading) - yInput * Math.sin(heading);
+                new_y = xInput * Math.sin(heading) + yInput * Math.cos(heading);
+            }else{
+                new_x = xInput;
+                new_y = yInput;
+            }
 
             Vector2d input = new Vector2d(
                     (new_x),

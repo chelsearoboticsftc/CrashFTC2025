@@ -20,7 +20,7 @@ public class TurretTest extends LinearOpMode {
             ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
             while(opModeIsActive()){
                 if(gamepad1.b) {
-                    shooter.aim(50, .5);
+                    shooter.aim(.5);
                 }
         }
     }
