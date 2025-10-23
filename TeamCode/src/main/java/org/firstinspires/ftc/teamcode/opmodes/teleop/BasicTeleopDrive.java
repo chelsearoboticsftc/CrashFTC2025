@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -32,18 +33,26 @@ public class BasicTeleopDrive extends LinearOpMode {
                 sleep(5000);*/
             //End of Rob's vision
             ShooterSubsystem Shooter = new ShooterSubsystem(hardwareMap);
+            Intake intake = new Intake(hardwareMap);
             drive.setDrivePowers(
                     new PoseVelocity2d(
                             new Vector2d(-gamepad1.left_stick_y,
                                          -gamepad1.left_stick_x),
-                            -gamepad2.right_stick_x));
+                            -gamepad1.right_stick_x));
             if(gamepad1.a){
                 Shooter.runShooter(-1);
 
             }if(gamepad1.b){
-                Shooter.aim(0.1);
-            }else {
+                Shooter.aim(0.7);
+            }
+
+
+                if(gamepad1.y) {
+                    intake.setIntakePower(-gamepad1.left_trigger);
+                }else{
                 Shooter.runShooter(0);
+                Shooter.aim(0);
+                intake.setIntakePower(0);
             }
         }
     }

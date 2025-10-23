@@ -83,7 +83,6 @@ public class ShooterSubsystem {
         //motorName.setTargetPosition(motorSetPosition);
     }
     public void aim(double power){
-
             turret.setPower(power);
     }
    public void runShooter(double power){
