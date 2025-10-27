@@ -15,12 +15,13 @@ public class ShooterSubsystem {
     DcMotorEx flyWheelMotorTop;
     DcMotorEx flyWheelMotorBottom;
     DcMotorEx turret;
-    CRServo HoodServo;
+    CRServo hood;
 
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
     private double motorPower = 0;
     double encoder_position = 0;
+
 
     public ShooterSubsystem(HardwareMap hardwareMap){
         //Constructor for the SampleSubsystem class.  This code is called everytime you create
@@ -35,6 +36,7 @@ public class ShooterSubsystem {
         //Example code defining a DcMotor object to a motor in the config called "motorName"
         this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"FW1");
         this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"FW2");
+        this.hood = hardwareMap.get(CRServo.class, "hood");
         this.turret = hardwareMap.get(DcMotorEx.class, "turret");
         this.turret.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         this.turret.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -89,6 +91,18 @@ public class ShooterSubsystem {
        flyWheelMotorBottom.setPower(power);
        flyWheelMotorTop.setPower(power);
 
+   }
+   public void moveHood(double power){
+        hood.setPower(power);
+   }
+   public void prime(double hoodPos, double power){
+       //configuire as positional
+        hood.setPosition(hoodPos);
+        runShooter(power);
+   }
+   public void stop(){
+       hood.setPosition(0);
+       runShooter(0);
    }
    public void runTopShooterMotor(double power){
        flyWheelMotorTop.setPower(power);

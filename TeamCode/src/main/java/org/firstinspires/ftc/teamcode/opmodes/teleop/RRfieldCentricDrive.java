@@ -15,6 +15,13 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 @TeleOp
 public class RRfieldCentricDrive extends LinearOpMode{
 
+    int tagID = 0;
+
+    public void setTagID(int tagID){
+        this.tagID = tagID;
+    }
+
+
     @Override
     public void runOpMode() throws InterruptedException{
 

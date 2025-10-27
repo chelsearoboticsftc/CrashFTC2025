@@ -15,7 +15,7 @@ public class ShooterMotorMoveTest extends LinearOpMode {
 
         while (opModeIsActive()) {
             ShooterSubsystem Shooter = new ShooterSubsystem(hardwareMap);
-            double power = -gamepad1.right_trigger;
+            double power = -1;
 
             if (gamepad1.a) {
                 Shooter.runTopShooterMotor(power);

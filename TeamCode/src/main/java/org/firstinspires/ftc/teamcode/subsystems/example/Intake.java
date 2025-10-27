@@ -1,8 +1,13 @@
+
 package org.firstinspires.ftc.teamcode.subsystems.example;
 
+import android.graphics.Path;
+
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Intake {
 
@@ -10,7 +15,8 @@ public class Intake {
 
     //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx intake;
-
+    Servo popupServo;
+    CRServo intakeServo;
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
     private double motorPower = 0;
@@ -27,7 +33,9 @@ public class Intake {
 
         //Example code defining a DcMotor object to a motor in the config called "motorName"
         this.intake = hardwareMap.get(DcMotorEx.class,"intake");
-
+        this.popupServo = hardwareMap.get(Servo.class, "popupServo");
+        this.intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+        this.popupServo.setDirection(Servo.Direction.REVERSE);
         //This defines the behavior at zero power (brake or coast)
         intake.setZeroPowerBehavior(SampleSubsystemConstants.MOTOR_NAME_ZERO_POWER_BEHAVIOR);
 
@@ -95,6 +103,13 @@ public class Intake {
     //Example return motorName position
     public int getMotorPosition(){
         return intake.getCurrentPosition();
+    }
+    public void setPopUpPos(double pos){
+        popupServo.setPosition(pos);
+
+    }
+    public void setIntakeServoPower(double power){
+        intakeServo.setPower(power);
     }
 
     public int getMotorTargetPosition(){

@@ -9,7 +9,7 @@ public class SampleVisionTester extends LinearOpMode {
 
     private double distance;
 
-    @Override
+
     public void runOpMode() throws InterruptedException {
 
         SampleVision GoalDistance = new SampleVision(hardwareMap);

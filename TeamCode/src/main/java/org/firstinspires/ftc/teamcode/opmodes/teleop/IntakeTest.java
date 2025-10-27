@@ -22,8 +22,18 @@ public class IntakeTest extends LinearOpMode {
         while(opModeIsActive()){
             if(gamepad1.b) {
                 intake.setIntakePower(gamepad1.right_stick_y);
+                intake.setIntakeServoPower(gamepad1.right_stick_y);
             }else{
                 intake.setIntakePower(0);
+                intake.setIntakeServoPower(0);
+            }
+            if(gamepad1.aWasPressed()){
+                intake.setPopUpPos(0.3);
+            }
+            if(gamepad1.xWasPressed()){
+                intake.setPopUpPos(0.6);
+            }else{
+
             }
         }
     }

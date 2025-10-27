@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.SampleSubsystemConstant
 
 @TeleOp
 public class SampleTestSubsystemTeleop extends LinearOpMode {
-    @Override
+
     public void runOpMode() throws InterruptedException {
         SampleSubsystem subsystem = new SampleSubsystem(hardwareMap);
 
