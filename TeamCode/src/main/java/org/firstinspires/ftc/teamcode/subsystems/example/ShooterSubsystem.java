@@ -40,8 +40,8 @@ public class ShooterSubsystem {
         this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"FW2");
         this.hood = hardwareMap.get(Servo.class, "hood");
         this.turret = hardwareMap.get(DcMotorEx.class, "turret");
-        this.turret.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        this.turret.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //this.turret.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+       // this.turret.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         //this.HoodServo = hardwareMap.get(CRServo.class, "Hood");
 

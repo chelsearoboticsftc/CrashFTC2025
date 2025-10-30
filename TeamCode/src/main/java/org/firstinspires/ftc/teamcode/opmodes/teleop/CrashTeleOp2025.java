@@ -29,11 +29,11 @@ public class CrashTeleOp2025 extends LinearOpMode {
                                     -gamepad1.left_stick_x),
                             -gamepad1.right_stick_x));
             //intake
-            if(gamepad2.x){
-                intake.setIntakePower(0);
+            if(gamepad2.xWasPressed()){
+                intake.setIntakePower(1);
             }
             if(gamepad2.xWasReleased()){
-                intake.setIntakePower(-1);
+                intake.setIntakePower(0);
             }
 
 
@@ -51,14 +51,39 @@ public class CrashTeleOp2025 extends LinearOpMode {
             if(gamepad2.yWasReleased()) {
                 shooter.runShooter(0);
             }
+            if(gamepad2.aWasPressed()) {
+                shooter.runShooter(1);
+            }
+            if(gamepad2.aWasReleased()) {
+                shooter.runShooter(0);
+            }
 
-            //fire
+
+
             if(gamepad2.dpad_down){
                 intake.setPopUpPos(0);
             }
             if(gamepad2.dpad_up){
-                intake.setPopUpPos(-0.5);
+                intake.setPopUpPos(180);
             }
+
+            //hood
+            if(gamepad1.dpad_down){
+                shooter.moveHood(0);
+            }
+            if(gamepad1.dpad_up){
+                shooter.moveHood(180);
+            }
+
+            //turret
+            if(gamepad2.left_bumper){
+                shooter.aim(.5);
+            }else if(gamepad2.right_bumper){
+                shooter.aim(-.5);
+            }else{
+                shooter.aim(-0);
+            }
+
 
 
 
