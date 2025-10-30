@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class ShooterSubsystem {
 
@@ -15,7 +16,8 @@ public class ShooterSubsystem {
     DcMotorEx flyWheelMotorTop;
     DcMotorEx flyWheelMotorBottom;
     DcMotorEx turret;
-    CRServo hood;
+    Servo hood;
+
 
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
@@ -36,7 +38,7 @@ public class ShooterSubsystem {
         //Example code defining a DcMotor object to a motor in the config called "motorName"
         this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"FW1");
         this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"FW2");
-        this.hood = hardwareMap.get(CRServo.class, "hood");
+        this.hood = hardwareMap.get(Servo.class, "hood");
         this.turret = hardwareMap.get(DcMotorEx.class, "turret");
         this.turret.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         this.turret.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -92,13 +94,14 @@ public class ShooterSubsystem {
        flyWheelMotorTop.setPower(power);
 
    }
-   public void moveHood(double power){
-        hood.setPower(power);
+   public void moveHood(double position){
+        hood.setPosition(position);
    }
    public void prime(double hoodPos, double power){
-       //configuire as positional
+
         hood.setPosition(hoodPos);
         runShooter(power);
+
    }
    public void stop(){
        hood.setPosition(0);

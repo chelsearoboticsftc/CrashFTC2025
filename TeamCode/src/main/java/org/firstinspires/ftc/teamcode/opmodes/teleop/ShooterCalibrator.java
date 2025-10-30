@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 @TeleOp
+@Disabled
 public class ShooterCalibrator extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {

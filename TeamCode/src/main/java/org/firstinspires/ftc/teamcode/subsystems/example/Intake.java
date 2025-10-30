@@ -16,7 +16,7 @@ public class Intake {
     //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx intake;
     Servo popupServo;
-    CRServo intakeServo;
+    //CRServo intakeServo;
     //Declare any other global variables for this class here
     private int motorSetPosition = 0;
     private double motorPower = 0;
@@ -34,7 +34,7 @@ public class Intake {
         //Example code defining a DcMotor object to a motor in the config called "motorName"
         this.intake = hardwareMap.get(DcMotorEx.class,"intake");
         this.popupServo = hardwareMap.get(Servo.class, "popupServo");
-        this.intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+       // this.intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
         this.popupServo.setDirection(Servo.Direction.REVERSE);
         //This defines the behavior at zero power (brake or coast)
         intake.setZeroPowerBehavior(SampleSubsystemConstants.MOTOR_NAME_ZERO_POWER_BEHAVIOR);
@@ -108,9 +108,9 @@ public class Intake {
         popupServo.setPosition(pos);
 
     }
-    public void setIntakeServoPower(double power){
-        intakeServo.setPower(power);
-    }
+    /*public void setIntakeServoPower(double power){
+        //intakeServo.setPower(power);
+    }*/
 
     public int getMotorTargetPosition(){
         return intake.getTargetPosition();

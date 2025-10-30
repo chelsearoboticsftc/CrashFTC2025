@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
@@ -6,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 @TeleOp
+@Disabled
 public class ShooterMotorMoveTest extends LinearOpMode {
 
 
