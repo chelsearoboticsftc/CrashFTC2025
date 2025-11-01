@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
 @TeleOp
-@Disabled
+
 public class RRfieldCentricDrive extends LinearOpMode{
 
     int tagID = 0;
