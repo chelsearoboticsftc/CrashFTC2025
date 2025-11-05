@@ -19,18 +19,17 @@ public class GoalAutonRed extends LinearOpMode{
 
         waitForStart();
 
-        while(opModeIsActive()){
+            if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .lineToX(30)
+                            .lineToX(4)
                             .build());
-            shooter.prime(0, 1);
-            Thread.sleep(7000);
-            intake.setIntakePower(-1);
-            Thread.sleep(700);
-            intake.setIntakePower(0);
+            shooter.prime(0, -1);
+            Thread.sleep(2500);
+            intake.setIntakePower(1);
+            Thread.sleep(850);
+            shooter.prime(0, -1);
 
-        }
 
     }
 }

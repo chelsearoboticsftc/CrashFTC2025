@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 @Autonomous
-public class CloseAutonRed extends LinearOpMode {
+public class CompromiseAutonRed extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
@@ -18,14 +18,17 @@ public class CloseAutonRed extends LinearOpMode {
         Intake intake = new Intake(hardwareMap);
 
         waitForStart();
-        while(opModeIsActive()){
+
+            if(isStopRequested()) return;
             Actions.runBlocking(
-            drive.actionBuilder(new Pose2d(0, 0, 0))
-                    .lineToX(30)
-                    .build());
-
-
-        }
+                    drive.actionBuilder(new Pose2d(0, 0, 0))
+                            .lineToX(10)
+                            .build());
+            /*shooter.prime(0, -1);
+            Thread.sleep(2500);
+            intake.setIntakePower(1);
+            Thread.sleep(700);
+            shooter.prime(0, -1);*/
 
 
     }
