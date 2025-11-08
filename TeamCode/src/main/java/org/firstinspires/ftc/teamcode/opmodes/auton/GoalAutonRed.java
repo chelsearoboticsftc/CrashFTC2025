@@ -22,13 +22,13 @@ public class GoalAutonRed extends LinearOpMode{
             if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .lineToX(50)
+                            .lineToX(55)
                             .build());
-            shooter.prime(0, -1);
-            Thread.sleep(2500);
+            shooter.prime(0, 1);
+            Thread.sleep(3200);
             intake.setIntakePower(1);
             Thread.sleep(850);
-            shooter.prime(0, -1);
+            shooter.prime(0, 1);
 
 
     }
