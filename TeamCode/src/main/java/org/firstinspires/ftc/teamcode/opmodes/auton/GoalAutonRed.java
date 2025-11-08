@@ -22,7 +22,7 @@ public class GoalAutonRed extends LinearOpMode{
             if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .lineToX(4)
+                            .lineToX(50)
                             .build());
             shooter.prime(0, -1);
             Thread.sleep(2500);

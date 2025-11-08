@@ -47,12 +47,6 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
         while(opModeIsActive()) {
 
-            drive.setDrivePowers(
-                    new PoseVelocity2d(
-                            new Vector2d(-gamepad1.left_stick_y,
-                                    -gamepad1.left_stick_x),
-                            -gamepad1.right_stick_x));
-
             drive.updatePoseEstimate();
             Pose2d pose = drive.localizer.getPose();
             double x_pos = pose.position.x;
@@ -110,13 +104,13 @@ public class RRfieldCentricDrive extends LinearOpMode{
                 shooter.runShooter(-1);
             }
             if(gamepad2.yWasReleased()) {
-                shooter.runShooter(0);
+                shooter.runShooter(-0.3);
             }
             if(gamepad2.aWasPressed()) {
                 shooter.runShooter(1);
             }
             if(gamepad2.aWasReleased()) {
-                shooter.runShooter(0);
+                shooter.runShooter(-0.3);
             }
 
 
