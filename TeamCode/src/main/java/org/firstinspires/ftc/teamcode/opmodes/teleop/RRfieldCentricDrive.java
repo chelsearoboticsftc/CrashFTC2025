@@ -104,13 +104,13 @@ public class RRfieldCentricDrive extends LinearOpMode{
                 shooter.runShooter(-1);
             }
             if(gamepad2.yWasReleased()) {
-                shooter.runShooter(-0.3);
+                shooter.runShooter(0.3);
             }
             if(gamepad2.aWasPressed()) {
                 shooter.runShooter(1);
             }
             if(gamepad2.aWasReleased()) {
-                shooter.runShooter(-0.3);
+                shooter.runShooter(0.3);
             }
 
 
