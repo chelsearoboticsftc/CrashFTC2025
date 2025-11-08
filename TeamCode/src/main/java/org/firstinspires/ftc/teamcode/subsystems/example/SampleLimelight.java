@@ -50,6 +50,8 @@ public class SampleLimelight{
         }
         return new Pose2d(x, y, heading);
     }
-
+    public void setPipeLine(int pipeline){
+        limelight.pipelineSwitch(pipeline);
+    }
 
 }
