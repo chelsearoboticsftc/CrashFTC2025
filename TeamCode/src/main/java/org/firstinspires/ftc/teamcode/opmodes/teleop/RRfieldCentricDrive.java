@@ -57,9 +57,10 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
             double new_x, new_y;
 
-            if (gamepad1.rightBumperWasPressed() && gamepad1.leftBumperWasPressed())
+            if (gamepad1.rightBumperWasPressed() && gamepad1.leftBumperWasPressed()){
 
-                heading = 0;
+               heading = 0;
+            }
 
             //can be changed to robot oriented if you change fieldOriented in MecanumDrive
             if (drive.PARAMS.fieldOriented) {
