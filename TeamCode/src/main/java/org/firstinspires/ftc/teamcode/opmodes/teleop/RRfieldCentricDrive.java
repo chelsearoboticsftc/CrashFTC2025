@@ -127,13 +127,6 @@ public class RRfieldCentricDrive extends LinearOpMode{
                 intake.setPopUpPos(180);
             }
 
-            //hood
-            if(gamepad1.dpad_down){
-                shooter.moveHood(0);
-            }
-            if(gamepad1.dpad_up){
-                shooter.moveHood(180);
-            }
 
             //turret
             if(gamepad2.left_bumper){
