@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 @Autonomous
 public class GoalAutonBlue extends LinearOpMode{
     @Override
+
     public void runOpMode() throws InterruptedException{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
