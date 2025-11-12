@@ -25,7 +25,7 @@ public class FarAutonBlue extends LinearOpMode{
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
 
-        //set velocity constranits
+        //set velocity constraints
         VelConstraint baseVelConstraint = new MinVelConstraint(Arrays.asList(
                 new TranslationalVelConstraint(10.0),
                 new AngularVelConstraint(Math.PI / 2)
@@ -66,6 +66,7 @@ public class FarAutonBlue extends LinearOpMode{
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
                         .turn(Math.toRadians(-45))
+                        .lineToX(42)
                         .build());
 
     }
