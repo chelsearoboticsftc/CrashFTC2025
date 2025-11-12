@@ -50,7 +50,7 @@ public class ShooterSubsystem {
         //This defines the behavior at zero power (brake or coast)
         flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
         flyWheelMotorBottom.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
-
+        turret.setZeroPowerBehavior(ShooterSubsystemConstants.TURRET_ZERO_POWER_BEHAVIOR);
         //This defines the motor direction (forward or reversed)
         flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);
         flyWheelMotorTop.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);

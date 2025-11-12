@@ -43,7 +43,7 @@ public class GoalAutonRed extends LinearOpMode{
                                     baseVelConstraint,
                                     baseAccelConstraint)
                             .build());
-            
+
             shooter.prime(0, 1);
             Thread.sleep(3200);
 
