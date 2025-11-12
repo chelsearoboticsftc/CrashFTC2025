@@ -37,15 +37,15 @@ public class FarAutonBlue extends LinearOpMode{
             if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .setTangent(0.0)
-                            .lineToY(-76,
+                            //.setTangent(180.0)
+                            .lineToX(-76,
                                     baseVelConstraint,
                                     baseAccelConstraint)
                             .build());
 
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(-45))
+                        .turn(Math.toRadians(45))
                         .build());
 
             shooter.prime(0, 1);
