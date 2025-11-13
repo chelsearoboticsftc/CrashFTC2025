@@ -29,10 +29,10 @@ public class GoalAutonRed extends LinearOpMode{
 
         //set velocity constranits
         VelConstraint baseVelConstraint = new MinVelConstraint(Arrays.asList(
-                new TranslationalVelConstraint(10.0),
+                new TranslationalVelConstraint(30.0),
                 new AngularVelConstraint(Math.PI / 2)
         ));
-        AccelConstraint baseAccelConstraint = new ProfileAccelConstraint(-10.0, 25.0);
+        AccelConstraint baseAccelConstraint = new ProfileAccelConstraint(-10.0, 30.0);
 
         waitForStart();
 
@@ -44,7 +44,7 @@ public class GoalAutonRed extends LinearOpMode{
                                     baseAccelConstraint)
                             .build());
 
-            shooter.prime(0, 1);
+            shooter.prime(0, 0.8);
             Thread.sleep(3200);
 
             intake.setIntakePower(1);

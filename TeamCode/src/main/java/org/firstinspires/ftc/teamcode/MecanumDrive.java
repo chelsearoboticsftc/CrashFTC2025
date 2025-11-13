@@ -54,7 +54,7 @@ import java.util.List;
 @Config
 public final class MecanumDrive {
     public static class Params {
-        // IMU orientation
+        // IMU orientationar
         // TODO: fill in these values based on
         //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
@@ -72,7 +72,7 @@ public final class MecanumDrive {
         // feedforward parameters (in tick units)
         public double kS = 2.0266441423694164;
         public double kV =  0.0003899635630308142;
-        public double kA = 0.0007;
+        public double kA = 0.000116;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
