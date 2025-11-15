@@ -13,14 +13,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 import java.util.Arrays;
 
 @Autonomous
-public class FarAutonBlue extends LinearOpMode{
+public class FarAutonBlue extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() throws InterruptedException {
+        SampleLimelight limelight = new SampleLimelight(hardwareMap);
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
@@ -34,44 +36,79 @@ public class FarAutonBlue extends LinearOpMode{
 
         waitForStart();
 
-            if(isStopRequested()) return;
-            Actions.runBlocking(
-                    drive.actionBuilder(new Pose2d(0, 0, 0))
-                            //.setTangent(180.0)
-                            .lineToX(-63,
-                                    baseVelConstraint,
-                                    baseAccelConstraint)
-                            .build());
-
+        if (isStopRequested()) return;
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(45))
-
+                        //.setTangent(180.0)
+                        .lineToX(-9,
+                                baseVelConstraint,
+                                baseAccelConstraint)
                         .build());
+        if (limelight.getresult() != null) {
+            if (limelight.getresult().isValid()) {
 
-            shooter.prime(0, 1);
-            Thread.sleep(3200);
+                //telemetry.addData("Pose2d that the limelight gives", botpose);
+                telemetry.addData("tx", limelight.getresult().getTx());
+                telemetry.addData("ty", limelight.getresult().getTy());
+                //telemetry.addData("pos",botpose.position);
+                //telemetry.addData("heading",botpose.heading);
+                telemetry.update();
+
+                if (limelight.getresult().getTx() < -2) {
+                    while (limelight.getresult().getTx() < -2) {
+                        shooter.aim(-0.1);
+                    }
+                    shooter.aim(0);
+
+
+                }
+                if (limelight.getresult().getTx() > 2) {
+                    while (limelight.getresult().getTx() > 2) {
+                        shooter.aim(0.1);
+                    }
+                    shooter.aim(0);
+
+
+                }
+            }
+
+
+            shooter.prime(0, 0.922);
+            Thread.sleep(3000);
 
             intake.setIntakePower(1);
-            Thread.sleep(850);
+            Thread.sleep(750);
 
             intake.setIntakePower(0);
-            Thread.sleep(1000);
+            Thread.sleep(2700);
 
             intake.setIntakePower(1);
-            Thread.sleep(1500);
+            Thread.sleep(750);
+
+            intake.setIntakePower(0);
+            Thread.sleep(2700);
+
+            intake.setIntakePower(1);
+            Thread.sleep(750);
 
             shooter.prime(0, 0);
 
 
-        Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(45))
-                        .lineToX(46
-                                ,
-                        baseVelConstraint,
-                        baseAccelConstraint)
-                        .build());
+            Actions.runBlocking(
+                            drive.actionBuilder(new Pose2d(0, 0, 0))
+                                    .turn(Math.toRadians(-90))
+                                .lineToY(10,
+                                    baseVelConstraint,
+                                    baseAccelConstraint)
+                                            .build());
+                    intake.setIntakePower(1);
+            Actions.runBlocking(
+                    drive.actionBuilder(new Pose2d(0, 0 , 90))
+                            .lineToY(16)
+                            .build());
 
+            intake.setIntakePower(0);
+
+        }
     }
 }

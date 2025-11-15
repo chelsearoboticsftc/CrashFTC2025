@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.MinVelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -50,11 +51,12 @@ public class GoalAutonBlue extends LinearOpMode{
         shooter.prime(0, 0.8);
         Thread.sleep(3200);
 
+
         intake.setIntakePower(1);
         Thread.sleep(850);
 
         intake.setIntakePower(0);
-        Thread.sleep(1000);
+        Thread.sleep(1200);
 
         intake.setIntakePower(1);
         Thread.sleep(1500);
@@ -62,7 +64,9 @@ public class GoalAutonBlue extends LinearOpMode{
         shooter.prime(0, 0);
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(-45))
+                       // .turn(Math.toRadians(-45))
+                       // .lineToX(20)
+                        .strafeTo(new Vector2d(0,-25))
                         .build());
 
 
