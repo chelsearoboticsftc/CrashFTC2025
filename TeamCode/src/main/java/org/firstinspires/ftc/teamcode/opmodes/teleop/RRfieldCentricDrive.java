@@ -14,6 +14,7 @@ import com.acmerobotics.roadrunner.MecanumKinematics;
 
 
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -37,6 +38,7 @@ public class RRfieldCentricDrive extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
 
+        SampleLimelight limelight = new SampleLimelight(hardwareMap);
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         Intake intake = new Intake(hardwareMap);
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
@@ -106,7 +108,7 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
             //prime
             if(gamepad2.yWasPressed()) {
-                shooter.runShooter(-0.8);
+                shooter.runShooter(0.9);
             }
             if(gamepad2.yWasReleased()) {
                 shooter.runShooter(0.3);
@@ -136,6 +138,20 @@ public class RRfieldCentricDrive extends LinearOpMode{
             }else{
                 shooter.aim(-0);
             }
+
+            //limelight
+            if(limelight.getresult() != null){
+                if(limelight.getresult().isValid()){
+
+                    telemetry.addData("tx",limelight.getresult().getTx());
+                    telemetry.addData("ty", limelight.getresult().getTy());
+
+                    telemetry.update();
+
+                }
+
+            }
+
         }
 
     }

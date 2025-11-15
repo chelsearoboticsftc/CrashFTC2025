@@ -39,12 +39,12 @@ public class GoalAutonRed extends LinearOpMode{
             if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .lineToX(36,
+                            .lineToX(39,
                                     baseVelConstraint,
                                     baseAccelConstraint)
                             .build());
 
-            shooter.prime(0, 0.9);
+            shooter.prime(0, 0.8);
             Thread.sleep(3200);
 
             intake.setIntakePower(1);
