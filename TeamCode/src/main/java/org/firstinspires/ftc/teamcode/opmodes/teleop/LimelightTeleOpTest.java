@@ -49,16 +49,16 @@ public class LimelightTeleOpTest extends LinearOpMode {
             }
 
                     if (gamepad1.a) {
-                        if (limelight.getresult().getTx() < -0.1) {
-                            while (limelight.getresult().getTx() < -0.1) {
+                        if (limelight.getresult().getTx() < -1) {
+                            while (limelight.getresult().getTx() < -1) {
                                 shooter.aim(-0.3);
                             }
                             shooter.aim(0);
 
 
                         }
-                        if (limelight.getresult().getTx() > 0.1) {
-                            while (limelight.getresult().getTx() > 0.1) {
+                        if (limelight.getresult().getTx() > 1) {
+                            while (limelight.getresult().getTx() > 1) {
                                 shooter.aim(0.3);
                             }
                             shooter.aim(0);
@@ -69,5 +69,7 @@ public class LimelightTeleOpTest extends LinearOpMode {
                 }
             }
         }
+
+
 
 
