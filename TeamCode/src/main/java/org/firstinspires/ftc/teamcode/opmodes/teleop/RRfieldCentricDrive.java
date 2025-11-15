@@ -57,7 +57,7 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
             double new_x, new_y;
 
-            if (gamepad1.rightBumperWasPressed() && gamepad1.leftBumperWasPressed()){
+            if (gamepad1.dpad_down){
 
                heading = 0;
             }
