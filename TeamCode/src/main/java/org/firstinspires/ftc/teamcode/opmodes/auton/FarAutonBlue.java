@@ -27,25 +27,26 @@ public class FarAutonBlue extends LinearOpMode{
 
         //set velocity constraints
         VelConstraint baseVelConstraint = new MinVelConstraint(Arrays.asList(
-                new TranslationalVelConstraint(10.0),
+                new TranslationalVelConstraint(30.0),
                 new AngularVelConstraint(Math.PI / 2)
         ));
-        AccelConstraint baseAccelConstraint = new ProfileAccelConstraint(-10.0, 25.0);
+        AccelConstraint baseAccelConstraint = new ProfileAccelConstraint(-10.0, 30.0);
 
         waitForStart();
 
             if(isStopRequested()) return;
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0, 0))
-                            .setTangent(0.0)
-                            .lineToY(-76,
+                            //.setTangent(180.0)
+                            .lineToX(-63,
                                     baseVelConstraint,
                                     baseAccelConstraint)
                             .build());
 
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(-45))
+                        .turn(Math.toRadians(45))
+
                         .build());
 
             shooter.prime(0, 1);
@@ -65,8 +66,11 @@ public class FarAutonBlue extends LinearOpMode{
 
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .turn(Math.toRadians(-45))
-                        .lineToX(42)
+                        .turn(Math.toRadians(45))
+                        .lineToX(46
+                                ,
+                        baseVelConstraint,
+                        baseAccelConstraint)
                         .build());
 
     }

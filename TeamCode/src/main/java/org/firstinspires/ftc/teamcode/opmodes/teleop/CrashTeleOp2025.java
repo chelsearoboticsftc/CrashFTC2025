@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -20,6 +21,7 @@ public class CrashTeleOp2025 extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         Intake intake = new Intake(hardwareMap);
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
+        SampleLimelight limelight = new SampleLimelight(hardwareMap);
         waitForStart();
         while(opModeIsActive()){
 
@@ -46,16 +48,16 @@ public class CrashTeleOp2025 extends LinearOpMode {
 
             //prime
             if(gamepad2.yWasPressed()) {
-                shooter.runShooter(-1);
+                shooter.runShooter(0.9);
             }
             if(gamepad2.yWasReleased()) {
-                shooter.runShooter(0);
+                shooter.runShooter(0.3);
             }
             if(gamepad2.aWasPressed()) {
-                shooter.runShooter(1);
+                shooter.runShooter(0.8);
             }
             if(gamepad2.aWasReleased()) {
-                shooter.runShooter(0);
+                shooter.runShooter(0.3);
             }
 
 
@@ -83,6 +85,38 @@ public class CrashTeleOp2025 extends LinearOpMode {
             }else{
                 shooter.aim(-0);
             }
+            if(limelight.getresult() != null){
+                if(limelight.getresult().isValid()){
+
+                    telemetry.addData("tx",limelight.getresult().getTx());
+                    telemetry.addData("ty", limelight.getresult().getTy());
+
+                    telemetry.update();
+
+                }
+
+            }
+
+            if (gamepad1.x){
+                if (limelight.getresult().getTx() < -0.1) {
+                    while (limelight.getresult().getTx() < -0.1) {
+                        shooter.aim(-0.2);
+                    }
+                    shooter.aim(0);
+
+
+                }
+                if (limelight.getresult().getTx() > 0.1) {
+                    while (limelight.getresult().getTx() > 0.1) {
+                        shooter.aim(0.2);
+                    }
+                    shooter.aim(0);
+
+
+                }
+            }
+
+
 
 
 
