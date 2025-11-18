@@ -40,12 +40,11 @@ public class FarAutonRed extends LinearOpMode {
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
                         //.setTangent(180.0)
-                        .lineToX(-9,
+                        .lineToX(-8,
                                 baseVelConstraint,
                                 baseAccelConstraint)
                         .build());
-        if (limelight.getresult() != null) {
-            if (limelight.getresult().isValid()) {
+
 
                 //telemetry.addData("Pose2d that the limelight gives", botpose);
                 telemetry.addData("tx", limelight.getresult().getTx());
@@ -54,42 +53,42 @@ public class FarAutonRed extends LinearOpMode {
                 //telemetry.addData("heading",botpose.heading);
                 telemetry.update();
 
-                if (limelight.getresult().getTx() < -2) {
-                    while (limelight.getresult().getTx() < -2) {
-                        shooter.aim(-0.1);
+                if (limelight.getresult().getTx() < -0.1) {
+                    while (limelight.getresult().getTx() < -0.1) {
+                        shooter.aim(-0.2);
                     }
                     shooter.aim(0);
 
 
                 }
-                if (limelight.getresult().getTx() > 2) {
-                    while (limelight.getresult().getTx() > 2) {
-                        shooter.aim(0.1);
+                if (limelight.getresult().getTx() > 0.1) {
+                    while (limelight.getresult().getTx() > 0.1) {
+                        shooter.aim(0.2);
                     }
                     shooter.aim(0);
 
 
                 }
-            }
 
 
-            shooter.prime(0, 0.8);
+
+            shooter.prime(0, 9);
             Thread.sleep(3000);
 
             intake.setIntakePower(1);
-            Thread.sleep(750);
+            Thread.sleep(650);
 
             intake.setIntakePower(0);
             Thread.sleep(2700);
 
             intake.setIntakePower(1);
-            Thread.sleep(750);
+            Thread.sleep(525);
 
             intake.setIntakePower(0);
             Thread.sleep(2700);
 
             intake.setIntakePower(1);
-            Thread.sleep(750);
+            Thread.sleep(1550);
 
             shooter.prime(0, 0);
 
@@ -104,11 +103,11 @@ public class FarAutonRed extends LinearOpMode {
                     intake.setIntakePower(1);
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0 , 90))
-                            .lineToY(6)
+                            .lineToY(24)
                             .build());
 
             intake.setIntakePower(0);
 
         }
     }
-}
+
