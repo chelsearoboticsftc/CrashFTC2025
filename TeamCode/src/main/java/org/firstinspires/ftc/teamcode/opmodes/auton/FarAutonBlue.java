@@ -54,17 +54,17 @@ public class FarAutonBlue extends LinearOpMode {
                 //telemetry.addData("heading",botpose.heading);
                 telemetry.update();
 
-                if (limelight.getresult().getTx() < -2) {
-                    while (limelight.getresult().getTx() < -2) {
-                        shooter.aim(-0.1);
+                if (limelight.getresult().getTx() < -0.1) {
+                    while (limelight.getresult().getTx() < -0.1) {
+                        shooter.aim(-0.2);
                     }
                     shooter.aim(0);
 
 
                 }
-                if (limelight.getresult().getTx() > 2) {
-                    while (limelight.getresult().getTx() > 2) {
-                        shooter.aim(0.1);
+                if (limelight.getresult().getTx() > 0.1) {
+                    while (limelight.getresult().getTx() > 0.1) {
+                        shooter.aim(0.2);
                     }
                     shooter.aim(0);
 
