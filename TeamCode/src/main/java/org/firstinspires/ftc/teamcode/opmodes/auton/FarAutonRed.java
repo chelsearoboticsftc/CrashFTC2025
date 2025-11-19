@@ -72,14 +72,14 @@ public class FarAutonRed extends LinearOpMode {
 
 
 
-            shooter.prime(0, 9);
-            Thread.sleep(3000);
+            shooter.prime(0, 0.8795);
+            Thread.sleep(4000);
 
             intake.setIntakePower(1);
             Thread.sleep(650);
 
             intake.setIntakePower(0);
-            Thread.sleep(2700);
+            Thread.sleep(3400);
 
             intake.setIntakePower(1);
             Thread.sleep(525);
@@ -95,18 +95,21 @@ public class FarAutonRed extends LinearOpMode {
 
             Actions.runBlocking(
                             drive.actionBuilder(new Pose2d(0, 0, 0))
-                                    .turn(Math.toRadians(90))
-                                .lineToY(10,
+                                    .turn(Math.toRadians(94.55))
+                                .lineToY(-10,
                                     baseVelConstraint,
                                     baseAccelConstraint)
                                             .build());
                     intake.setIntakePower(1);
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0 , 90))
-                            .lineToY(24)
+                            .lineToY(20)
                             .build());
-
             intake.setIntakePower(0);
+            Actions.runBlocking(
+                    drive.actionBuilder(new Pose2d(0, 0 , 90))
+                            .lineToY(40)
+                            .build());
 
         }
     }

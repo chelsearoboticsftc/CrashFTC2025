@@ -73,7 +73,7 @@ public class FarAutonBlue extends LinearOpMode {
             }
 
 
-            shooter.prime(0, 9);
+            shooter.prime(0, 0.85);
             Thread.sleep(3000);
 
             intake.setIntakePower(1);
@@ -104,7 +104,7 @@ public class FarAutonBlue extends LinearOpMode {
                     intake.setIntakePower(1);
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0 , 90))
-                            .lineToY(-24)
+                            .lineToY(24)
                             .build());
 
             intake.setIntakePower(0);

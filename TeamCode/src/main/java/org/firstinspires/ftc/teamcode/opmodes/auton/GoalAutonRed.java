@@ -43,7 +43,7 @@ public class GoalAutonRed extends LinearOpMode{
                                 baseAccelConstraint)
                         .build());
 
-        shooter.prime(0, 0.8);
+        shooter.prime(0, 0.9);
         Thread.sleep(3200);
 
 
@@ -59,9 +59,8 @@ public class GoalAutonRed extends LinearOpMode{
         shooter.prime(0, 0);
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                       // .turn(Math.toRadians(-45))
-                       // .lineToX(20)
-                        .strafeTo(new Vector2d(0,25))
+                       .turn(Math.toRadians(-45))
+                       .lineToX(-.20)
                         .build());
 
 
