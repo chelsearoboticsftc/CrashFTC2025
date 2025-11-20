@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auton;
 
+import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.AutoEndPose;
+
 import com.acmerobotics.roadrunner.AccelConstraint;
 import com.acmerobotics.roadrunner.AngularVelConstraint;
 import com.acmerobotics.roadrunner.MinVelConstraint;
@@ -110,7 +112,9 @@ public class FarAutonRed extends LinearOpMode {
                     drive.actionBuilder(new Pose2d(0, 0 , 90))
                             .lineToY(40)
                             .build());
-
+        AutoEndPose = drive.localizer.getPose();
+        telemetry.addData("Vaughn Value", AutoEndPose);
+        telemetry.update();
         }
     }
 

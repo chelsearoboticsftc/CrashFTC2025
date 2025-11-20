@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
+import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.AutoEndPose;
+
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -14,6 +16,7 @@ import com.acmerobotics.roadrunner.MecanumKinematics;
 
 
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.PersistentData;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
@@ -47,10 +50,16 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
         waitForStart();
 
+        drive.localizer.setPose(AutoEndPose);
+
+
         while(opModeIsActive()) {
 
             drive.updatePoseEstimate();
             Pose2d pose = drive.localizer.getPose();
+            telemetry.addData("Auto Pose Given", AutoEndPose);
+            telemetry.addData("Current Pose", pose);
+
             double x_pos = pose.position.x;
             double y_pos = pose.position.y;
             double heading = pose.heading.toDouble();

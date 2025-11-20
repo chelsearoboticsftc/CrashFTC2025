@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
+import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.AutoEndPose;
+
 import com.acmerobotics.roadrunner.MecanumKinematics;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
@@ -7,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.PersistentData;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleVision;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
@@ -22,7 +25,12 @@ public class CrashTeleOp2025 extends LinearOpMode {
         Intake intake = new Intake(hardwareMap);
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         SampleLimelight limelight = new SampleLimelight(hardwareMap);
+
         waitForStart();
+
+        telemetry.addData("Vaughn Value", AutoEndPose);
+        telemetry.update();
+
         while(opModeIsActive()){
 
             drive.setDrivePowers(

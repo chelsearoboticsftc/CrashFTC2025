@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auton;
 
+import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.AutoEndPose;
+
 import com.acmerobotics.roadrunner.AccelConstraint;
 import com.acmerobotics.roadrunner.AngularVelConstraint;
 import com.acmerobotics.roadrunner.MinVelConstraint;
@@ -23,6 +25,7 @@ public class GoalAutonRed extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        drive.localizer.setPose(new Pose2d(0, 0 , 45));
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
 
@@ -62,7 +65,9 @@ public class GoalAutonRed extends LinearOpMode{
                        .turn(Math.toRadians(-45))
                        .lineToX(-.20)
                         .build());
-
+        AutoEndPose = drive.localizer.getPose();
+        telemetry.addData("End Pose (Vaughn Value)", AutoEndPose);
+        telemetry.update();
 
 
     }
