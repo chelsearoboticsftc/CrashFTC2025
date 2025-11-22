@@ -108,11 +108,15 @@ double ET;
 
             }
 
-            if (gamepad1.x){
+            if (gamepad2.back){
                 start = getRuntime();
                 ET=0;
+                telemetry.addData("starting", ET);
+                telemetry.update();
+                gamepad2.rumble(1000);
                 while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2 ){
-                    shooter.aim(limelight.getresult().getTx() * 0.1);
+                    telemetry.addData("ET", ET);
+                    shooter.aim(limelight.getresult().getTx() * 0.02);
                     ET = getRuntime() - start;
                 }
                 shooter.aim(0);

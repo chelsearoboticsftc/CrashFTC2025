@@ -29,17 +29,17 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @TeleOp
 
-public class RRfieldCentricDrive extends LinearOpMode{
+public class RRfieldCentricDrive extends LinearOpMode {
 
     int tagID = 0;
 
-    public void setTagID(int tagID){
+    public void setTagID(int tagID) {
         this.tagID = tagID;
     }
 
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() throws InterruptedException {
 
         SampleLimelight limelight = new SampleLimelight(hardwareMap);
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
@@ -49,11 +49,12 @@ public class RRfieldCentricDrive extends LinearOpMode{
         //get the Heading
 
         waitForStart();
-
+        double ET;
+        double start;
         drive.localizer.setPose(AutoEndPose);
 
 
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
 
             drive.updatePoseEstimate();
             Pose2d pose = drive.localizer.getPose();
@@ -68,16 +69,16 @@ public class RRfieldCentricDrive extends LinearOpMode{
 
             double new_x, new_y;
 
-            if (gamepad1.dpad_down){
+            if (gamepad1.dpad_down) {
 
-               heading = 0;
+                heading = 0;
             }
 
             //can be changed to robot oriented if you change fieldOriented in MecanumDrive
             if (drive.PARAMS.fieldOriented) {
                 new_x = xInput * Math.cos(heading) - yInput * Math.sin(heading);
                 new_y = xInput * Math.sin(heading) + yInput * Math.cos(heading);
-            }else{
+            } else {
                 new_x = xInput;
                 new_y = yInput;
             }
@@ -100,69 +101,80 @@ public class RRfieldCentricDrive extends LinearOpMode{
             telemetry.update();
 
             //intake
-            if(gamepad2.xWasPressed()){
+            if (gamepad2.xWasPressed()) {
                 intake.setIntakePower(1);
             }
-            if(gamepad2.xWasReleased()){
+            if (gamepad2.xWasReleased()) {
                 intake.setIntakePower(0);
             }
 
 
-            if(gamepad2.b){
+            if (gamepad2.b) {
                 intake.setIntakePower(-1);
             }
-            if(gamepad2.bWasReleased()){
+            if (gamepad2.bWasReleased()) {
                 intake.setIntakePower(0);
             }
 
             //prime
-            if(gamepad2.yWasPressed()) {
+            if (gamepad2.yWasPressed()) {
                 shooter.runShooter(0.9);
             }
-            if(gamepad2.yWasReleased()) {
+            if (gamepad2.yWasReleased()) {
                 shooter.runShooter(0.5);
             }
-            if(gamepad2.aWasPressed()) {
+            if (gamepad2.aWasPressed()) {
                 shooter.runShooter(0.8);
             }
-            if(gamepad2.aWasReleased()) {
+            if (gamepad2.aWasReleased()) {
                 shooter.runShooter(0.5);
             }
 
 
-
-
-            if(gamepad2.dpad_down){
+            if (gamepad2.dpad_down) {
                 intake.setPopUpPos(0);
             }
-            if(gamepad2.dpad_up){
+            if (gamepad2.dpad_up) {
                 intake.setPopUpPos(180);
             }
 
 
             //turret
-            if(gamepad2.left_bumper){
+            if (gamepad2.left_bumper) {
                 shooter.aim(.5);
-            }else if(gamepad2.right_bumper){
+            } else if (gamepad2.right_bumper) {
                 shooter.aim(-.5);
-            }else{
+            } else {
                 shooter.aim(-0);
             }
 
-            //limelight
-            if(limelight.getresult() != null){
-                if(limelight.getresult().isValid()){
+            if (gamepad2.back) {
+                start = getRuntime();
+                ET = 0;
+                telemetry.addData("starting", ET);
+                telemetry.update();
+                gamepad2.rumble(1000);
+                while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
+                    telemetry.addData("ET", ET);
+                    shooter.aim(limelight.getresult().getTx() * 0.02);
+                    ET = getRuntime() - start;
+                }
+                shooter.aim(0);
+                //limelight
+                if (limelight.getresult() != null) {
+                    if (limelight.getresult().isValid()) {
 
-                    telemetry.addData("tx",limelight.getresult().getTx());
-                    telemetry.addData("ty", limelight.getresult().getTy());
+                        telemetry.addData("tx", limelight.getresult().getTx());
+                        telemetry.addData("ty", limelight.getresult().getTy());
 
-                    telemetry.update();
+                        telemetry.update();
+
+                    }
 
                 }
 
             }
 
         }
-
     }
 }
