@@ -28,7 +28,7 @@ public class FarAutonRed extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
-
+        drive.localizer.setPose(new Pose2d(0, 0 , 90));;
         //set velocity constraints
         VelConstraint baseVelConstraint = new MinVelConstraint(Arrays.asList(
                 new TranslationalVelConstraint(30.0),
@@ -102,7 +102,7 @@ public class FarAutonRed extends LinearOpMode {
                                     baseVelConstraint,
                                     baseAccelConstraint)
                                             .build());
-                    intake.setIntakePower(1);
+                   // intake.setIntakePower(1);
             Actions.runBlocking(
                     drive.actionBuilder(new Pose2d(0, 0 , 90))
                             .lineToY(20)
