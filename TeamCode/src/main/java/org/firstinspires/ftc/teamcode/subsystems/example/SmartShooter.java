@@ -66,4 +66,5 @@ public class SmartShooter {
     public void setMotorVelocity(double angularRate) {
         this.motor.setVelocity(angularRate);
     }
+    public double getMotorVelocity(){return this.motor.getVelocity();}
 }
