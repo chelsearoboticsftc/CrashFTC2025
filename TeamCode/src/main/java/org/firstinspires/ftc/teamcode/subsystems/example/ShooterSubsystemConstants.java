@@ -8,7 +8,7 @@ public class ShooterSubsystemConstants {
     public static final int MOTOR_NAME_THRESHOLD = 5;
     public static final DcMotor.ZeroPowerBehavior FLYWHEEL_ZERO_POWER_BEHAVIOR = DcMotor.ZeroPowerBehavior.FLOAT;
     public static final DcMotor.ZeroPowerBehavior TURRET_ZERO_POWER_BEHAVIOR = DcMotor.ZeroPowerBehavior.BRAKE;
-    public static final DcMotorSimple.Direction FLYWHEEL_REVERSE = DcMotorSimple.Direction.REVERSE;
+    public static final DcMotorSimple.Direction FLYWHEEL_REVERSE = DcMotorSimple.Direction.FORWARD;
     public static final DcMotorSimple.Direction FLYWHEEL_FORWARD = DcMotorSimple.Direction.FORWARD;
     public static final double FLYWHEEL_VELOCITY_P = 1.0;
     public static final double FLYWHEEL_VELOCITY_I = 0.0;

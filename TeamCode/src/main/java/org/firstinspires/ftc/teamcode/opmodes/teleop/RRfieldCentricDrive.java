@@ -52,7 +52,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
         double ET;
         double start;
         drive.localizer.setPose(AutoEndPose);
-
+        int ShooterActive = 0;
 
         while (opModeIsActive()) {
 
@@ -68,6 +68,8 @@ public class RRfieldCentricDrive extends LinearOpMode {
             double yInput = -gamepad1.left_stick_x;
 
             double new_x, new_y;
+
+
 
             if (gamepad1.dpad_down) {
 
@@ -116,37 +118,75 @@ public class RRfieldCentricDrive extends LinearOpMode {
                 intake.setIntakePower(0);
             }
 
+
+
             //prime
-            if (gamepad2.yWasPressed()) {
-                shooter.runShooter(0.9);
+
+          //  if(ShooterActive == 1){
+           //     shooter.runShooter(0.9);
+           // }
+
+            if (gamepad2.yWasPressed() && ShooterActive == 0) {
+            ShooterActive = 1;
+            shooter.runShooter(0.9);
             }
-            if (gamepad2.yWasReleased()) {
-                shooter.runShooter(0.5);
+
+            if (gamepad2.yWasPressed() && ShooterActive == 1) {
+                shooter.setMotorPower(0.5);
+                ShooterActive = 0;
             }
+
             if (gamepad2.aWasPressed()) {
-                shooter.runShooter(0.8);
+                intake.setPopUpPos(.5);
+                sleep(500);
+                intake.setPopUpPos(.12);
+                //ShooterActive = 0;
+                //shooter.setMotorPower(0.5);
             }
-            if (gamepad2.aWasReleased()) {
-                shooter.runShooter(0.5);
+            if (gamepad2.leftBumperWasPressed()){
+                shooter.setMotorPower(0.6);
+                shooter.moveHood(0.5);
+            }
+
+            if (gamepad2.leftBumperWasReleased()){
+                shooter.setMotorPower(0.5);
+                shooter.moveHood(0.4);
+            }
+
+            if (gamepad2.rightBumperWasPressed()){
+                shooter.setMotorPower(1);
+                shooter.moveHood(0.3);
+            }
+            if (gamepad2.rightBumperWasReleased()){
+                shooter.setMotorPower(0.5);
+                shooter.moveHood(0.4);
             }
 
 
-            if (gamepad2.dpad_down) {
-                intake.setPopUpPos(0);
+//            if (gamepad2.dpad_down) {
+//                intake.setPopUpPos(.12);
+//            }
+//            if (gamepad2.dpad_up) {
+//                intake.setPopUpPos(.5);
+//            }
+
+            //hood
+            if(gamepad2.dpad_up){
+                    shooter.moveHood(0.33);
             }
-            if (gamepad2.dpad_up) {
-                intake.setPopUpPos(180);
-            }
+            if(gamepad2.dpad_down){
+                    shooter.moveHood(0.5);
+
 
 
             //turret
-            if (gamepad2.left_bumper) {
-                shooter.aim(.5);
-            } else if (gamepad2.right_bumper) {
-                shooter.aim(-.5);
-            } else {
-                shooter.aim(-0);
-            }
+//            if (gamepad2.left_bumper) {
+//                shooter.aim(.5);
+//            } else if (gamepad2.right_bumper) {
+//                shooter.aim(-.5);
+//            } else {
+//                shooter.aim(-0);
+//            }
 
             if (gamepad2.back) {
                 start = getRuntime();
@@ -177,4 +217,5 @@ public class RRfieldCentricDrive extends LinearOpMode {
 
         }
     }
-}
+}}
+

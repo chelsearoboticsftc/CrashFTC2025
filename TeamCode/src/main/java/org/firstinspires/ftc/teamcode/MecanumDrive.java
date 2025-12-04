@@ -65,13 +65,13 @@ public final class MecanumDrive {
         // drive model parameters
 
 
-        public double inPerTick = 0.00326142347545439;
-        public double lateralInPerTick =  0.0021947872472111623;
-        public double trackWidthTicks = 4023.9165543873437;//3864.9359834776856;
+        public double inPerTick = 0.003064351379;
+        public double lateralInPerTick =  0.0022023804050260993; //0.0021947872472111623;
+        public double trackWidthTicks = 3950.337352533425; //4023.9165543873437;//3864.9359834776856;
 
         // feedforward parameters (in tick units)
-        public double kS = 2.0266441423694164;
-        public double kV =  0.0003899635630308142;
+        public double kS = 1.8072483842501437; //2.0266441423694164;
+        public double kV =  0.0003878834251406729; //0.0003899635630308142;
         public double kA = 0.000116;
 
         // path profile parameters (in inches)
@@ -85,7 +85,7 @@ public final class MecanumDrive {
 
         // path controller gains
         public double axialGain = 0.0;
-        public double lateralGain = 1.0;
+        public double lateralGain = 0.0;
         public double headingGain = 0.0; // shared with turn
 
         public double axialVelGain = 0.0;
@@ -242,7 +242,7 @@ public final class MecanumDrive {
 
         // TODO: reverse motor directions if needed
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
 
