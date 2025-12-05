@@ -70,7 +70,6 @@ public class RRfieldCentricDrive extends LinearOpMode {
             double new_x, new_y;
 
 
-
             if (gamepad1.dpad_down) {
 
                 heading = 0;
@@ -119,48 +118,50 @@ public class RRfieldCentricDrive extends LinearOpMode {
             }
 
 
-
             //prime
 
-          //  if(ShooterActive == 1){
-           //     shooter.runShooter(0.9);
-           // }
+              if(ShooterActive == 1){
+                 shooter.runShooter(0.9);
+             }
 
-            if (gamepad2.yWasPressed() && ShooterActive == 0) {
-            ShooterActive = 1;
-            shooter.runShooter(0.9);
-            }
+//            if (gamepad2.yWasPressed() && ShooterActive == 0) {
+//            ShooterActive = 1;
+//            shooter.runShooter(0.9);
+//            }
 
-            if (gamepad2.yWasPressed() && ShooterActive == 1) {
-                shooter.setMotorPower(0.5);
-                ShooterActive = 0;
-            }
+//            if (gamepad2.yWasPressed() && ShooterActive == 1) {
+//                shooter.setMotorPower(0.5);
+//                ShooterActive = 0;
+//            }
+            //if (gamepad2.yWasPressed()) {
+          //      ShooterActive = 1;
+              //  shooter.runShooter(1);
+//            }
+                if (gamepad2.aWasPressed()) {
+                    intake.setPopUpPos(.5);
+                    sleep(500);
+                    intake.setPopUpPos(.12);
+                    //ShooterActive = 0;
+                    //shooter.setMotorPower(0.5);
+                }
+                if (gamepad2.leftBumperWasPressed()) {
+                    shooter.setMotorPower(0.75);
+                    shooter.moveHood(0.5);
+                }
 
-            if (gamepad2.aWasPressed()) {
-                intake.setPopUpPos(.5);
-                sleep(500);
-                intake.setPopUpPos(.12);
-                //ShooterActive = 0;
-                //shooter.setMotorPower(0.5);
-            }
-            if (gamepad2.leftBumperWasPressed()){
-                shooter.setMotorPower(0.6);
-                shooter.moveHood(0.5);
-            }
+                if (gamepad2.leftBumperWasReleased()) {
+                    shooter.setMotorPower(0.5);
+                    shooter.moveHood(0.4);
+                }
 
-            if (gamepad2.leftBumperWasReleased()){
-                shooter.setMotorPower(0.5);
-                shooter.moveHood(0.4);
-            }
-
-            if (gamepad2.rightBumperWasPressed()){
-                shooter.setMotorPower(1);
-                shooter.moveHood(0.3);
-            }
-            if (gamepad2.rightBumperWasReleased()){
-                shooter.setMotorPower(0.5);
-                shooter.moveHood(0.4);
-            }
+                if (gamepad2.rightBumperWasPressed()) {
+                    shooter.setMotorPower(1);
+                    shooter.moveHood(0.3);
+                }
+                if (gamepad2.rightBumperWasReleased()) {
+                    shooter.setMotorPower(0.5);
+                    shooter.moveHood(0.4);
+                }
 
 
 //            if (gamepad2.dpad_down) {
@@ -170,52 +171,53 @@ public class RRfieldCentricDrive extends LinearOpMode {
 //                intake.setPopUpPos(.5);
 //            }
 
-            //hood
-            if(gamepad2.dpad_up){
+                //hood
+                if (gamepad2.dpad_up) {
                     shooter.moveHood(0.33);
-            }
-            if(gamepad2.dpad_down){
+                }
+                if (gamepad2.dpad_down) {
                     shooter.moveHood(0.5);
 
 
+                    //turret
+            if (gamepad2.dpad_left) {
+                shooter.aim(.5);
+            } else if (gamepad2.dpad_right) {
+                shooter.aim(-.5);
+            } else {
+                shooter.aim(-0);
+            }
 
-            //turret
-//            if (gamepad2.left_bumper) {
-//                shooter.aim(.5);
-//            } else if (gamepad2.right_bumper) {
-//                shooter.aim(-.5);
-//            } else {
-//                shooter.aim(-0);
-//            }
-
-            if (gamepad2.back) {
-                start = getRuntime();
-                ET = 0;
-                telemetry.addData("starting", ET);
-                telemetry.update();
-                gamepad2.rumble(1000);
-                while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
-                    telemetry.addData("ET", ET);
-                    shooter.aim(limelight.getresult().getTx() * 0.02);
-                    ET = getRuntime() - start;
-                }
-                shooter.aim(0);
-                //limelight
-                if (limelight.getresult() != null) {
-                    if (limelight.getresult().isValid()) {
-
-                        telemetry.addData("tx", limelight.getresult().getTx());
-                        telemetry.addData("ty", limelight.getresult().getTy());
-
+                    if (gamepad2.back) {
+                        start = getRuntime();
+                        ET = 0;
+                        telemetry.addData("starting", ET);
                         telemetry.update();
+                        gamepad2.rumble(1000);
+                        while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
+                            telemetry.addData("ET", ET);
+                            shooter.aim(limelight.getresult().getTx() * 0.02);
+                            ET = getRuntime() - start;
+                        }
+                        shooter.aim(0);
+                        //limelight
+                        if (limelight.getresult() != null) {
+                            if (limelight.getresult().isValid()) {
+
+                                telemetry.addData("tx", limelight.getresult().getTx());
+                                telemetry.addData("ty", limelight.getresult().getTy());
+
+                                telemetry.update();
+
+                            }
+
+                        }
 
                     }
 
                 }
-
             }
-
         }
     }
-}}
+
 
