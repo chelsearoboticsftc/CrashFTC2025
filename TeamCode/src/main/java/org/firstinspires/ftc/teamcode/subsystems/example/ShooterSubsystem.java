@@ -44,12 +44,13 @@ public class ShooterSubsystem {
        // this.turret.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         //this.HoodServo = hardwareMap.get(CRServo.class, "Hood");
-
-
+       // turret.setTargetPosition(0);
+        //turret.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //This defines the behavior at zero power (brake or coast)
         flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
         flyWheelMotorBottom.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
+
         turret.setZeroPowerBehavior(ShooterSubsystemConstants.TURRET_ZERO_POWER_BEHAVIOR);
         //This defines the motor direction (forward or reversed)
         flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);
@@ -89,6 +90,11 @@ public class ShooterSubsystem {
     public void aim(double power){
             turret.setPower(power);
     }
+
+
+
+
+
    public void runShooter(double power){
        flyWheelMotorBottom.setPower(power);
        flyWheelMotorTop.setPower(power);

@@ -48,7 +48,7 @@ public class FarAutonRed extends LinearOpMode {
                                 baseAccelConstraint)
                         .build());
 
-                 shooter.prime(0, 0.95);
+                 shooter.prime(0, 0.89);
                 //telemetry.addData("Pose2d that the limelight gives", botpose);
                 telemetry.addData("tx", limelight.getresult().getTx());
                 telemetry.addData("ty", limelight.getresult().getTy());
@@ -89,7 +89,7 @@ public class FarAutonRed extends LinearOpMode {
         Thread.sleep(650);
 
         intake.setIntakePower(0);
-        Thread.sleep(1650);
+        Thread.sleep(1450);
 
         intake.setPopUpPos(0.5);
         sleep(500);
@@ -98,7 +98,7 @@ public class FarAutonRed extends LinearOpMode {
         Thread.sleep(525);
 
         intake.setIntakePower(0);
-        Thread.sleep(1750);
+        Thread.sleep(1450);
 
         intake.setPopUpPos(0.5);
         sleep(500);
@@ -195,6 +195,10 @@ public class FarAutonRed extends LinearOpMode {
                         .build()
         );
 
+        Actions.runBlocking(
+                drive.actionBuilder(new Pose2d(0, -10, Math.toRadians(-83)))
+                        .build()
+        );
 
         AutoEndPose = drive.localizer.getPose();
         telemetry.addData("Vaughn Value", AutoEndPose);

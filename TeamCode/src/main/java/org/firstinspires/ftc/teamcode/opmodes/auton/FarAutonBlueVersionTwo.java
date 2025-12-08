@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import java.util.Arrays;
 
 @Autonomous
-public class FarAutonBlue extends LinearOpMode {
+public class FarAutonBlueVersionTwo extends LinearOpMode {
     @Override
 
     public void runOpMode() throws InterruptedException {
@@ -49,13 +49,13 @@ public class FarAutonBlue extends LinearOpMode {
                                 baseAccelConstraint)
                         .build());
 
-        shooter.prime(0, 0.93);
+        shooter.prime(0, 0.89);
         //telemetry.addData("Pose2d that the limelight gives", botpose);
-        telemetry.addData("tx", limelight.getresult().getTx());
-        telemetry.addData("ty", limelight.getresult().getTy());
+ //       telemetry.addData("tx", limelight.getresult().getTx());
+ //       telemetry.addData("ty", limelight.getresult().getTy());
         //telemetry.addData("pos",botpose.position);
         //telemetry.addData("heading",botpose.heading);
-        telemetry.update();
+ //       telemetry.update();
 
 //        if (limelight.getresult().getTx() < -0.1) {
 //            while (limelight.getresult().getTx() < -0.1) {
@@ -74,26 +74,26 @@ public class FarAutonBlue extends LinearOpMode {
         double start;
         start = getRuntime();
         ET = 0;
-        while(!limelight.getresult().isValid()){
-            shooter.aim(-0.3);
-        }
-        shooter.aim(0);
-
-        telemetry.addData("starting", ET);
-        telemetry.update();
-       // gamepad2.rumble(1000);
-        while (Math.abs(limelight.getresult().getTx()) > 2 && ET < 2) {
-            telemetry.addData("ET", ET);
-            shooter.aim(limelight.getresult().getTx() * 0.03);
-            ET = getRuntime() - start;
-
-
-        }
+//        while(!limelight.getresult().isValid()){
+//            shooter.aim(-0.3);
+//        }
+//        shooter.aim(0);
+//
+//        telemetry.addData("starting", ET);
+//        telemetry.update();
+//       // gamepad2.rumble(1000);
+//        while (Math.abs(limelight.getresult().getTx()) > 2 && ET < 2) {
+//            telemetry.addData("ET", ET);
+//            shooter.aim(limelight.getresult().getTx() * 0.03);
+//            ET = getRuntime() - start;
+//
+//
+//        }
 
 
 
         shooter.moveHood(0.3);
-        Thread.sleep(2300);
+        Thread.sleep(2400);
 
 
         intake.setPopUpPos(0.5);
@@ -143,21 +143,24 @@ public class FarAutonBlue extends LinearOpMode {
                             .build());*/
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(22, 28, Math.toRadians(83)))
-                        .strafeTo(new Vector2d(-5, -10))
+                        .strafeTo(new Vector2d(-5, -9))
                         //.lineToY(20,
                         //   baseVelConstraint,
                         //  baseAccelConstraint)
                         .build());
         // intake.setIntakePower(1);
-        shooter.setMotorPower(1);
+        shooter.setMotorPower(.89);
 
         start = getRuntime();
         ET = 0;
         while(!limelight.getresult().isValid()) {
             shooter.aim(0.3);
+
         }
+     //   ET = 0;
         shooter.aim(0);
         sleep(500);
+        ET = 0;
         telemetry.addData("starting", ET);
         telemetry.update();
        // gamepad2.rumble(1000);
@@ -213,17 +216,17 @@ public class FarAutonBlue extends LinearOpMode {
         Thread.sleep(525);
 
         intake.setIntakePower(0);
-        //Thread.sleep(2050);
+        Thread.sleep(1650);
 
-        // intake.setPopUpPos(0.5);
-        // sleep(500);
-        // intake.setPopUpPos(0.12);
-        //  intake.setIntakePower(1);
+         intake.setPopUpPos(0.5);
+         sleep(500);
+         intake.setPopUpPos(0.12);
+          intake.setIntakePower(0);
         // Thread.sleep(1550);
 
         shooter.prime(0, 0);
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(0, -10, Math.toRadians(83)))
+                drive.actionBuilder(new Pose2d(-5, -10, Math.toRadians(83)))
                         .lineToY(10)
                         .build()
         );

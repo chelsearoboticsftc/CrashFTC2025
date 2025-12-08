@@ -6,6 +6,7 @@ import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.A
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.PersistentData;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 @Autonomous
+@Disabled
 public class CompromiseAutonRed extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{

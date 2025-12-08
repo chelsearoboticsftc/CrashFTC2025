@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.MecanumKinematics;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -19,6 +20,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 //Vaughn
 @TeleOp
+@Disabled
 public class CrashTeleOp2025 extends LinearOpMode {
 
     @Override
@@ -90,9 +92,9 @@ double ET;
 
             //turret
             if(gamepad2.left_bumper){
-                shooter.aim(.5);
-            }else if(gamepad2.right_bumper){
                 shooter.aim(-.5);
+            }else if(gamepad2.right_bumper){
+                shooter.aim(.5);
             }else{
                 shooter.aim(-0);
             }

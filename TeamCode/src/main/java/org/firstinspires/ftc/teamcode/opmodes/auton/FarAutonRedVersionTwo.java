@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.AngularVelConstraint;
 import com.acmerobotics.roadrunner.MinVelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ProfileAccelConstraint;
+import com.acmerobotics.roadrunner.Rotation2d;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
@@ -22,7 +23,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import java.util.Arrays;
 
 @Autonomous
-public class FarAutonBlue extends LinearOpMode {
+public class FarAutonRedVersionTwo extends LinearOpMode {
     @Override
 
     public void runOpMode() throws InterruptedException {
@@ -49,13 +50,13 @@ public class FarAutonBlue extends LinearOpMode {
                                 baseAccelConstraint)
                         .build());
 
-        shooter.prime(0, 0.93);
+        shooter.prime(0, 0.89);
         //telemetry.addData("Pose2d that the limelight gives", botpose);
-        telemetry.addData("tx", limelight.getresult().getTx());
-        telemetry.addData("ty", limelight.getresult().getTy());
+ //       telemetry.addData("tx", limelight.getresult().getTx());
+ //       telemetry.addData("ty", limelight.getresult().getTy());
         //telemetry.addData("pos",botpose.position);
         //telemetry.addData("heading",botpose.heading);
-        telemetry.update();
+ //       telemetry.update();
 
 //        if (limelight.getresult().getTx() < -0.1) {
 //            while (limelight.getresult().getTx() < -0.1) {
@@ -74,26 +75,26 @@ public class FarAutonBlue extends LinearOpMode {
         double start;
         start = getRuntime();
         ET = 0;
-        while(!limelight.getresult().isValid()){
-            shooter.aim(-0.3);
-        }
-        shooter.aim(0);
-
-        telemetry.addData("starting", ET);
-        telemetry.update();
-       // gamepad2.rumble(1000);
-        while (Math.abs(limelight.getresult().getTx()) > 2 && ET < 2) {
-            telemetry.addData("ET", ET);
-            shooter.aim(limelight.getresult().getTx() * 0.03);
-            ET = getRuntime() - start;
-
-
-        }
+//        while(!limelight.getresult().isValid()){
+//            shooter.aim(-0.3);
+//        }
+//        shooter.aim(0);
+//
+//        telemetry.addData("starting", ET);
+//        telemetry.update();
+//       // gamepad2.rumble(1000);
+//        while (Math.abs(limelight.getresult().getTx()) > 2 && ET < 2) {
+//            telemetry.addData("ET", ET);
+//            shooter.aim(limelight.getresult().getTx() * 0.03);
+//            ET = getRuntime() - start;
+//
+//
+//        }
 
 
 
         shooter.moveHood(0.3);
-        Thread.sleep(2300);
+        Thread.sleep(2400);
 
 
         intake.setPopUpPos(0.5);
@@ -126,15 +127,15 @@ public class FarAutonBlue extends LinearOpMode {
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
                         .lineToX(22)
-                        .turn(Math.toRadians(83))
+                        .turn(Math.toRadians(-83))
                         //.lineToY(20,
                         //   baseVelConstraint,
                         //  baseAccelConstraint)
                         .build());
         // intake.setIntakePower(1);
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(22, 0 , Math.toRadians(83)))
-                        .lineToY(28)
+                drive.actionBuilder(new Pose2d(22, 0 , Math.toRadians(-83)))
+                        .lineToY(-28)
                         .build());
         intake.setIntakePower(0);
             /*Actions.runBlocking(
@@ -142,28 +143,32 @@ public class FarAutonBlue extends LinearOpMode {
                             .lineToY(20)
                             .build());*/
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(22, 28, Math.toRadians(83)))
-                        .strafeTo(new Vector2d(-5, -10))
+                drive.actionBuilder(new Pose2d(22, -28, Math.toRadians(-83)))
+                        .splineTo(new Vector2d(0, 0), new Rotation2d(0, 0))
                         //.lineToY(20,
                         //   baseVelConstraint,
                         //  baseAccelConstraint)
                         .build());
         // intake.setIntakePower(1);
-        shooter.setMotorPower(1);
+        shooter.setMotorPower(.89);
 
         start = getRuntime();
         ET = 0;
         while(!limelight.getresult().isValid()) {
-            shooter.aim(0.3);
+            shooter.aim(-0.3);
+            Thread.sleep(1200);
+            shooter.aim(0);
+            break;
         }
         shooter.aim(0);
         sleep(500);
+        ET = 0;
         telemetry.addData("starting", ET);
         telemetry.update();
        // gamepad2.rumble(1000);
         while (Math.abs(limelight.getresult().getTx()) > 1 && ET < 2) {
             telemetry.addData("ET", ET);
-            shooter.aim(limelight.getresult().getTx() * 0.02);
+            shooter.aim(-limelight.getresult().getTx() * 0.02);
             ET = getRuntime() - start;
 
 
@@ -213,18 +218,18 @@ public class FarAutonBlue extends LinearOpMode {
         Thread.sleep(525);
 
         intake.setIntakePower(0);
-        //Thread.sleep(2050);
+        Thread.sleep(1650);
 
-        // intake.setPopUpPos(0.5);
-        // sleep(500);
-        // intake.setPopUpPos(0.12);
-        //  intake.setIntakePower(1);
+         intake.setPopUpPos(0.5);
+         sleep(500);
+         intake.setPopUpPos(0.12);
+          intake.setIntakePower(0);
         // Thread.sleep(1550);
 
         shooter.prime(0, 0);
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(0, -10, Math.toRadians(83)))
-                        .lineToY(10)
+                drive.actionBuilder(new Pose2d(-8, 0, Math.toRadians(-78)))
+                        .lineToY(-10)
                         .build()
         );
 

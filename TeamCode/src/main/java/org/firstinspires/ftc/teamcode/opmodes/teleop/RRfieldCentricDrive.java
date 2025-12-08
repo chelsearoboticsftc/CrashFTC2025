@@ -95,7 +95,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
                     powers
             );
 
-
+        //    telemetry.addData("Shooter Motor Pos", shooter.getPosition());
             telemetry.addData("x position", x_pos);
             telemetry.addData("y position", y_pos);
             telemetry.addData("heading", Math.toDegrees(heading));
@@ -138,14 +138,14 @@ public class RRfieldCentricDrive extends LinearOpMode {
               //  shooter.runShooter(1);
 //            }
                 if (gamepad2.aWasPressed()) {
-                    intake.setPopUpPos(.5);
+                    intake.setPopUpPos(0.5);
                     sleep(500);
-                    intake.setPopUpPos(.12);
+                    intake.setPopUpPos(0.12);
                     //ShooterActive = 0;
                     //shooter.setMotorPower(0.5);
                 }
                 if (gamepad2.leftBumperWasPressed()) {
-                    shooter.setMotorPower(0.75);
+                    shooter.setMotorPower(0.65);
                     shooter.moveHood(0.5);
                 }
 
@@ -155,7 +155,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
                 }
 
                 if (gamepad2.rightBumperWasPressed()) {
-                    shooter.setMotorPower(1);
+                    shooter.setMotorPower(0.89);
                     shooter.moveHood(0.3);
                 }
                 if (gamepad2.rightBumperWasReleased()) {
@@ -177,18 +177,24 @@ public class RRfieldCentricDrive extends LinearOpMode {
                 }
                 if (gamepad2.dpad_down) {
                     shooter.moveHood(0.5);
-
+}
 
                     //turret
-            if (gamepad2.dpad_left) {
-                shooter.aim(.5);
-            } else if (gamepad2.dpad_right) {
-                shooter.aim(-.5);
-            } else {
+            if (gamepad2.dpadLeftWasPressed()) {
+                shooter.aim(0.4);
+            }
+            if (gamepad2.dpadRightWasPressed()) {
+                shooter.aim(-0.4);
+           }
+if (gamepad2.dpadLeftWasReleased()){
+                        shooter.aim(-0);
+}
+
+            if (gamepad2.dpadRightWasReleased()){
                 shooter.aim(-0);
             }
 
-                    if (gamepad2.back) {
+                    if (gamepad2.backWasPressed()) {
                         start = getRuntime();
                         ET = 0;
                         telemetry.addData("starting", ET);
@@ -218,6 +224,6 @@ public class RRfieldCentricDrive extends LinearOpMode {
                 }
             }
         }
-    }
+
 
 
