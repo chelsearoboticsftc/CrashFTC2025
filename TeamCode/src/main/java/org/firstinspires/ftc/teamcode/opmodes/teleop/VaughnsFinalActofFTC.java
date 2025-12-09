@@ -29,7 +29,8 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @TeleOp
 
-public class RRfieldCentricDrive extends LinearOpMode {
+public class VaughnsFinalActofFTC extends LinearOpMode {
+
 
     int tagID = 0;
 
@@ -70,10 +71,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
             double new_x, new_y;
 
 
-            if (gamepad1.dpad_down) {
 
-                heading = 0;
-            }
 
             //can be changed to robot oriented if you change fieldOriented in MecanumDrive
             if (drive.PARAMS.fieldOriented) {
@@ -95,34 +93,34 @@ public class RRfieldCentricDrive extends LinearOpMode {
                     powers
             );
 
-        //    telemetry.addData("Shooter Motor Pos", shooter.getPosition());
+            //    telemetry.addData("Shooter Motor Pos", shooter.getPosition());
             telemetry.addData("x position", x_pos);
             telemetry.addData("y position", y_pos);
             telemetry.addData("heading", Math.toDegrees(heading));
             telemetry.update();
 
             //intake
-            if (gamepad2.xWasPressed()) {
+            if (gamepad1.xWasPressed()) {
                 intake.setIntakePower(1);
             }
-            if (gamepad2.xWasReleased()) {
+            if (gamepad1.xWasReleased()) {
                 intake.setIntakePower(0);
             }
 
 
-            if (gamepad2.b) {
+            if (gamepad1.b) {
                 intake.setIntakePower(-1);
             }
-            if (gamepad2.bWasReleased()) {
+            if (gamepad1.bWasReleased()) {
                 intake.setIntakePower(0);
             }
 
 
             //prime
 
-              if(ShooterActive == 1){
-                 shooter.runShooter(0.9);
-             }
+            if(ShooterActive == 1){
+                shooter.runShooter(0.9);
+            }
 
 //            if (gamepad2.yWasPressed() && ShooterActive == 0) {
 //            ShooterActive = 1;
@@ -134,34 +132,34 @@ public class RRfieldCentricDrive extends LinearOpMode {
 //                ShooterActive = 0;
 //            }
             //if (gamepad2.yWasPressed()) {
-          //      ShooterActive = 1;
-              //  shooter.runShooter(1);
+            //      ShooterActive = 1;
+            //  shooter.runShooter(1);
 //            }
-                if (gamepad2.aWasPressed()) {
-                    intake.setPopUpPos(0.5);
-                    sleep(500);
-                    intake.setPopUpPos(0.12);
-                    //ShooterActive = 0;
-                    //shooter.setMotorPower(0.5);
-                }
-                if (gamepad2.leftBumperWasPressed()) {
-                    shooter.setMotorPower(0.75);
-                    shooter.moveHood(0.5);
-                }
+            if (gamepad1.aWasPressed()) {
+                intake.setPopUpPos(0.5);
+                sleep(500);
+                intake.setPopUpPos(0.12);
+                //ShooterActive = 0;
+                //shooter.setMotorPower(0.5);
+            }
+            if (gamepad1.leftBumperWasPressed()) {
+                shooter.setMotorPower(0.65);
+                shooter.moveHood(0.5);
+            }
 
-                if (gamepad2.leftBumperWasReleased()) {
-                    shooter.setMotorPower(0.5);
-                    shooter.moveHood(0.4);
-                }
+            if (gamepad1.leftBumperWasReleased()) {
+                shooter.setMotorPower(0.5);
+                shooter.moveHood(0.4);
+            }
 
-                if (gamepad2.rightBumperWasPressed()) {
-                    shooter.setMotorPower(1);
-                    shooter.moveHood(0.3);
-                }
-                if (gamepad2.rightBumperWasReleased()) {
-                    shooter.setMotorPower(0.5);
-                    shooter.moveHood(0.4);
-                }
+            if (gamepad1.rightBumperWasPressed()) {
+                shooter.setMotorPower(0.89);
+                shooter.moveHood(0.3);
+            }
+            if (gamepad1.rightBumperWasReleased()) {
+                shooter.setMotorPower(0.5);
+                shooter.moveHood(0.4);
+            }
 
 
 //            if (gamepad2.dpad_down) {
@@ -171,59 +169,59 @@ public class RRfieldCentricDrive extends LinearOpMode {
 //                intake.setPopUpPos(.5);
 //            }
 
-                //hood
-                if (gamepad2.dpad_up) {
-                    shooter.moveHood(0.33);
-                }
-                if (gamepad2.dpad_down) {
-                    shooter.moveHood(0.5);
-}
-
-                    //turret
-            if (gamepad2.dpadLeftWasPressed()) {
-                shooter.aim(0.2);
+            //hood
+            if (gamepad1.dpad_up) {
+                shooter.moveHood(0.33);
             }
-            if (gamepad2.dpadRightWasPressed()) {
-                shooter.aim(-0.2);
-           }
-if (gamepad2.dpadLeftWasReleased()){
-                        shooter.aim(-0);
-}
+            if (gamepad1.dpad_down) {
+                shooter.moveHood(0.5);
+            }
 
-            if (gamepad2.dpadRightWasReleased()){
+            //turret
+            if (gamepad1.dpadLeftWasPressed()) {
+                shooter.aim(0.4);
+            }
+            if (gamepad1.dpadRightWasPressed()) {
+                shooter.aim(-0.4);
+            }
+            if (gamepad1.dpadLeftWasReleased()){
                 shooter.aim(-0);
             }
 
-                    if (gamepad2.backWasPressed()) {
-                        start = getRuntime();
-                        ET = 0;
-                        telemetry.addData("starting", ET);
+            if (gamepad1.dpadRightWasReleased()){
+                shooter.aim(-0);
+            }
+
+            if (gamepad2.backWasPressed()) {
+                start = getRuntime();
+                ET = 0;
+                telemetry.addData("starting", ET);
+                telemetry.update();
+                gamepad2.rumble(1000);
+                while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
+                    telemetry.addData("ET", ET);
+                    shooter.aim(limelight.getresult().getTx() * 0.02);
+                    ET = getRuntime() - start;
+                }
+                shooter.aim(0);
+                //limelight
+                if (limelight.getresult() != null) {
+                    if (limelight.getresult().isValid()) {
+
+                        telemetry.addData("tx", limelight.getresult().getTx());
+                        telemetry.addData("ty", limelight.getresult().getTy());
+
                         telemetry.update();
-                        gamepad2.rumble(1000);
-                        while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
-                            telemetry.addData("ET", ET);
-                            shooter.aim(limelight.getresult().getTx() * 0.02);
-                            ET = getRuntime() - start;
-                        }
-                        shooter.aim(0);
-                        //limelight
-                        if (limelight.getresult() != null) {
-                            if (limelight.getresult().isValid()) {
-
-                                telemetry.addData("tx", limelight.getresult().getTx());
-                                telemetry.addData("ty", limelight.getresult().getTy());
-
-                                telemetry.update();
-
-                            }
-
-                        }
 
                     }
 
                 }
+
             }
+
         }
+    }
+}
 
 
 
