@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 @Autonomous
-public class CloseAutoRedNewMay2026 extends LinearOpMode {
+public class CloseAutoBlueNewMay2026 extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -29,14 +29,14 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
         waitForStart();
 
 
-        //This sets the pose 2D and moves back 30" to get a better shot
-Actions.runBlocking(
-        drive.actionBuilder(new Pose2d(0,0,0))
-                .lineToX(-55)
-                .build()
-);
+        //This sets the pose 2D and moves back 30" to get a better shot.
+        Actions.runBlocking(
+                drive.actionBuilder(new Pose2d(0,0,0))
+                        .lineToX(-55)
+                        .build()
+        );
 
-        //This is the code that shoots the balls (HOLY TUFF)
+        //This is the code that shoots the balls (HOLY TUFF).
         Thread.sleep(1000);
         intake.setPopUpPos(0.5);
         sleep(500);
@@ -64,14 +64,14 @@ Actions.runBlocking(
 
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(-55,0,0))
-                        .turnTo(Math.toRadians(-45))
-                        .lineToX(-35)
+                        .turnTo(Math.toRadians(45))
+                        .lineToX(35)
                         .turnTo(Math.toRadians(0))
-                        .lineToX(-55)
+                        .lineToX(55)
                         .build()
 
         );
-        //This is the code that shoots the balls AGAIN (HOLY TUFF SQUARED)
+        //This is the code that shoots the balls AGAIN (HOLY TUFF SQUARED).
         Thread.sleep(1000);
         intake.setPopUpPos(0.5);
         sleep(500);
@@ -94,6 +94,7 @@ Actions.runBlocking(
         intake.setPopUpPos(0.12);
         sleep(200);
         intake.setIntakePower(1);
+
 
     }
 }
