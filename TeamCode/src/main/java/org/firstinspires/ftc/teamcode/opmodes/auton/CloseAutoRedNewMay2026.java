@@ -3,6 +3,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auton;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.AutoEndPose;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -24,7 +25,7 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
 
-        shooter.prime(0.4, 0.6);
+        shooter.prime(0.325, 0.70);
 
         waitForStart();
 
@@ -32,7 +33,7 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
         //This sets the pose 2D and moves back 30" to get a better shot
 Actions.runBlocking(
         drive.actionBuilder(new Pose2d(0,0,0))
-                .lineToX(-55)
+                .lineToX(-50)
                 .build()
 );
 
@@ -62,24 +63,32 @@ Actions.runBlocking(
 
         //Code that """"""CAN"""""" pick up more balls.
 
+
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(-55,0,0))
-                        .turnTo(Math.toRadians(-45))
-                        .lineToX(-35)
-                        .turnTo(Math.toRadians(0))
-                        .lineToX(-55)
-                        .build()
+                drive.actionBuilder(new Pose2d(-50,0,0))
+                        .turnTo(Math.toRadians(-35))
+                        .lineToX(-15)
+                        .build());
+
+                sleep(250);
+
+                Actions.runBlocking(
+                        drive.actionBuilder(new Pose2d(-15,0, Math.toRadians(-35)))
+                                .lineToX(-44)
+                                .turnTo(Math.toRadians(-5))
+                                .build()
 
         );
         //This is the code that shoots the balls AGAIN (HOLY TUFF SQUARED)
-        Thread.sleep(1000);
+        intake.setIntakePower(0);
+        Thread.sleep(250);
         intake.setPopUpPos(0.5);
         sleep(500);
         intake.setPopUpPos(0.12);
-        sleep(500);
+        sleep(750);
 
         intake.setIntakePower(1);
-        Thread.sleep(1000);
+        Thread.sleep(500);
         intake.setIntakePower(0);
         intake.setPopUpPos(0.5);
         sleep(500);
@@ -94,6 +103,11 @@ Actions.runBlocking(
         intake.setPopUpPos(0.12);
         sleep(200);
         intake.setIntakePower(1);
+
+        //Takes The Pose For RRfieldCentricDrive
+        AutoEndPose = drive.localizer.getPose();
+        telemetry.addData("Vaughn Value", AutoEndPose);
+        telemetry.update();
 
     }
 }
