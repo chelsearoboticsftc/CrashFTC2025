@@ -24,7 +24,7 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
         Intake intake = new Intake(hardwareMap);
-
+        drive.localizer.setPose(new Pose2d(0, 0 , 45));
         shooter.prime(0.325, 0.70);
 
         waitForStart();
@@ -32,8 +32,8 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
 
         //This sets the pose 2D and moves back 30" to get a better shot
 Actions.runBlocking(
-        drive.actionBuilder(new Pose2d(0,0,0))
-                .lineToX(-50)
+        drive.actionBuilder(new Pose2d(0,0,45))
+                .lineToX(-25)
                 .build()
 );
 
@@ -65,17 +65,17 @@ Actions.runBlocking(
 
 
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(-50,0,0))
-                        .turnTo(Math.toRadians(-35))
-                        .lineToX(-15)
+                drive.actionBuilder(new Pose2d(-25,0, Math.toRadians(45)))
+                        .turnTo(Math.toRadians(5))
+                        .lineToX(-10)
                         .build());
 
                 sleep(250);
 
                 Actions.runBlocking(
-                        drive.actionBuilder(new Pose2d(-15,0, Math.toRadians(-35)))
-                                .lineToX(-44)
-                                .turnTo(Math.toRadians(-5))
+                        drive.actionBuilder(new Pose2d(-10,0, Math.toRadians(0)))
+                                .lineToX(-25)
+                                .turnTo(Math.toRadians(50))
                                 .build()
 
         );
