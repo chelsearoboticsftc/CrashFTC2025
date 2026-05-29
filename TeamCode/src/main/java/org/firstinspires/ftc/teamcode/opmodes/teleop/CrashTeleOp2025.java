@@ -116,7 +116,7 @@ double ET;
                 telemetry.addData("starting", ET);
                 telemetry.update();
                 gamepad2.rumble(1000);
-                while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2 ){
+                while (Math.abs(limelight.getresult().getTx()) > 0.5 ){
                     telemetry.addData("ET", ET);
                     shooter.aim(limelight.getresult().getTx() * 0.02);
                     ET = getRuntime() - start;

@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 @TeleOp
@@ -45,6 +46,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         Intake intake = new Intake(hardwareMap);
         ShooterSubsystem shooter = new ShooterSubsystem(hardwareMap);
+        SmartShooter smartShooter = new SmartShooter(hardwareMap);
 
         //get the Heading
 
@@ -95,7 +97,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
                     powers
             );
 
-        //    telemetry.addData("Shooter Motor Pos", shooter.getPosition());
+            //    telemetry.addData("Shooter Motor Pos", shooter.getPosition());
             telemetry.addData("x position", x_pos);
             telemetry.addData("y position", y_pos);
             telemetry.addData("heading", Math.toDegrees(heading));
@@ -120,9 +122,9 @@ public class RRfieldCentricDrive extends LinearOpMode {
 
             //prime
 
-              if(ShooterActive == 1){
-                 shooter.runShooter(0.9);
-             }
+//            if (ShooterActive == 1) {
+//                shooter.runShooter(0.9);
+//            }
 
 //            if (gamepad2.yWasPressed() && ShooterActive == 0) {
 //            ShooterActive = 1;
@@ -134,34 +136,35 @@ public class RRfieldCentricDrive extends LinearOpMode {
 //                ShooterActive = 0;
 //            }
             //if (gamepad2.yWasPressed()) {
-          //      ShooterActive = 1;
-              //  shooter.runShooter(1);
+            //      ShooterActive = 1;
+            //  shooter.runShooter(1);
 //            }
-                if (gamepad2.aWasPressed()) {
-                    intake.setPopUpPos(0.5);
-                    sleep(500);
-                    intake.setPopUpPos(0.12);
-                    //ShooterActive = 0;
-                    //shooter.setMotorPower(0.5);
-                }
-                if (gamepad2.leftBumperWasPressed()) {
-                    shooter.setMotorPower(0.75);
-                    shooter.moveHood(0.5);
-                }
+            if (gamepad2.aWasPressed()) {
+                intake.setPopUpPos(0.5);
+                sleep(500);
+                intake.setPopUpPos(0.12);
+                //ShooterActive = 0;
+                //shooter.setMotorPower(0.5);
+            }
+            if (gamepad2.leftBumperWasPressed()) {
+                smartShooter.setMotorVelocity(1300);
+                shooter.moveHood(0.5);
+            }
 
-                if (gamepad2.leftBumperWasReleased()) {
-                    shooter.setMotorPower(0.5);
-                    shooter.moveHood(0.4);
-                }
+            if (gamepad2.leftBumperWasReleased()) {
+                smartShooter.setMotorVelocity(1200);
+                shooter.moveHood(0.4);
+            }
 
-                if (gamepad2.rightBumperWasPressed()) {
-                    shooter.setMotorPower(1);
-                    shooter.moveHood(0.3);
-                }
-                if (gamepad2.rightBumperWasReleased()) {
-                    shooter.setMotorPower(0.5);
-                    shooter.moveHood(0.4);
-                }
+            if (gamepad2.rightBumperWasPressed()) {
+                smartShooter.shoot((limelight.getresult().getBotposeAvgDist()));
+                shooter.moveHood(0.325);
+
+            }
+            if (gamepad2.rightBumperWasReleased()) {
+                smartShooter.setMotorVelocity(1200);
+                shooter.moveHood(0.4);
+            }
 
 
 //            if (gamepad2.dpad_down) {
@@ -171,59 +174,59 @@ public class RRfieldCentricDrive extends LinearOpMode {
 //                intake.setPopUpPos(.5);
 //            }
 
-                //hood
-                if (gamepad2.dpad_up) {
-                    shooter.moveHood(0.33);
-                }
-                if (gamepad2.dpad_down) {
-                    shooter.moveHood(0.5);
-}
+            //hood
+            if (gamepad2.dpad_up) {
+                shooter.moveHood(0.33);
+            }
+            if (gamepad2.dpad_down) {
+                shooter.moveHood(0.5);
+            }
 
-                    //turret
+            //turret
             if (gamepad2.dpadLeftWasPressed()) {
                 shooter.aim(0.2);
             }
             if (gamepad2.dpadRightWasPressed()) {
                 shooter.aim(-0.2);
-           }
-if (gamepad2.dpadLeftWasReleased()){
-                        shooter.aim(-0);
-}
-
-            if (gamepad2.dpadRightWasReleased()){
+            }
+            if (gamepad2.dpadLeftWasReleased()) {
                 shooter.aim(-0);
             }
 
-                    if (gamepad2.backWasPressed()) {
+            if (gamepad2.dpadRightWasReleased()) {
+                shooter.aim(-0);
+            }
+
+            if (gamepad2.left_trigger >= .75) {
                         start = getRuntime();
                         ET = 0;
-                        telemetry.addData("starting", ET);
-                        telemetry.update();
-                        gamepad2.rumble(1000);
-                        while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET < 2) {
-                            telemetry.addData("ET", ET);
-                            shooter.aim(limelight.getresult().getTx() * 0.02);
+//                        telemetry.addData("starting", ET);
+//                        telemetry.update();
+                //gamepad2.rumble(1000);
+                while (Math.abs(limelight.getresult().getTx()) > 0.5 && ET< 1) {
+//                            telemetry.addData("ET", ET);
+                    shooter.aim(-limelight.getresult().getTx() * 0.02);
                             ET = getRuntime() - start;
-                        }
-                        shooter.aim(0);
-                        //limelight
-                        if (limelight.getresult() != null) {
-                            if (limelight.getresult().isValid()) {
+                }
+                shooter.aim(0);
+                //limelight
 
-                                telemetry.addData("tx", limelight.getresult().getTx());
-                                telemetry.addData("ty", limelight.getresult().getTy());
 
-                                telemetry.update();
+            }
+            if (limelight.getresult() != null) {
+                if (limelight.getresult().isValid()) {
 
-                            }
+                    telemetry.addData("tx", limelight.getresult().getTx());
+                    telemetry.addData("ty", limelight.getresult().getTy());
 
-                        }
-
-                    }
+                    telemetry.update();
 
                 }
+
             }
         }
+    }
+}
 
 
 

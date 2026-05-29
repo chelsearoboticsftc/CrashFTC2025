@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.teamcode.subsystems.example.PersistentData.A
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 
 @TeleOp
-
+@Disabled
 public class VaughnsFinalCurseofFTC extends LinearOpMode {
 
 

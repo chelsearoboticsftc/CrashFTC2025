@@ -28,7 +28,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
 @TeleOp
-
+@Disabled
 public class VaughnsFinalActofFTC extends LinearOpMode {
 
 

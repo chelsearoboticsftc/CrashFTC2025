@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 
 @Autonomous
-
+@Disabled
 public class CloseAutonRed extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException{

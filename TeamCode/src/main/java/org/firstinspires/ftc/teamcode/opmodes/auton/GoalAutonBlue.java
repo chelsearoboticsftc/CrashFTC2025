@@ -12,6 +12,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import kotlin.sequences.ConstrainedOnceSequence;
 
 @Autonomous
+@Disabled
 public class GoalAutonBlue extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{

@@ -11,6 +11,7 @@ public class SmartShooter {
     //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx motor;
 
+
     //Declare any other global variables for this class here
     private final LookupTable distanceToVelocity = new LookupTable(SmartShooterConstants.LOOKUP_TABLE);
 

@@ -13,7 +13,7 @@ public class ShooterSubsystem {
 
     //Declare HW objects here
 
-    DcMotorEx flyWheelMotorTop;
+//    DcMotorEx flyWheelMotorTop;
     DcMotorEx flyWheelMotorBottom;
     DcMotorEx turret;
     Servo hood;
@@ -36,7 +36,7 @@ public class ShooterSubsystem {
         //configuration exactly.  This is the connection with the Control Hub Config
 
         //Example code defining a DcMotor object to a motor in the config called "motorName"
-        this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"FW1");
+//        this.flyWheelMotorTop = hardwareMap.get(DcMotorEx.class,"FW1");
         this.flyWheelMotorBottom = hardwareMap.get(DcMotorEx.class,"FW2");
         this.hood = hardwareMap.get(Servo.class, "hood");
         this.turret = hardwareMap.get(DcMotorEx.class, "turret");
@@ -48,13 +48,13 @@ public class ShooterSubsystem {
         //turret.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //This defines the behavior at zero power (brake or coast)
-        flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
+//        flyWheelMotorTop.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
         flyWheelMotorBottom.setZeroPowerBehavior(ShooterSubsystemConstants.FLYWHEEL_ZERO_POWER_BEHAVIOR);
 
         turret.setZeroPowerBehavior(ShooterSubsystemConstants.TURRET_ZERO_POWER_BEHAVIOR);
         //This defines the motor direction (forward or reversed)
         flyWheelMotorBottom.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);
-        flyWheelMotorTop.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);
+//        flyWheelMotorTop.setDirection(ShooterSubsystemConstants.FLYWHEEL_REVERSE);
 
         /* This defines the motor velocity PIDF gains.  Velocity PIDF values determine control    *
          * around a target velocity (setTargetVelocity) OR how fast the system responds to a      *
@@ -97,7 +97,7 @@ public class ShooterSubsystem {
 
    public void runShooter(double power){
        flyWheelMotorBottom.setPower(power);
-       flyWheelMotorTop.setPower(power);
+//       flyWheelMotorTop.setPower(power);
 
    }
    public void moveHood(double position){
@@ -113,9 +113,9 @@ public class ShooterSubsystem {
        hood.setPosition(0);
        runShooter(0);
    }
-   public void runTopShooterMotor(double power){
-       flyWheelMotorTop.setPower(power);
-   }
+//   public void runTopShooterMotor(double power){
+//       flyWheelMotorTop.setPower(power);
+//   }
    public void runBottomShooterMotor(double power){
        flyWheelMotorBottom.setPower(power);
    }
@@ -126,7 +126,7 @@ public class ShooterSubsystem {
         //Call setTargetPositionTolerance to tell REV controller how close to the target position
         //can be considered "at" the target position (e.g. target postion +/- tolerance)
         flyWheelMotorBottom.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
-        flyWheelMotorTop.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
+//        flyWheelMotorTop.setTargetPositionTolerance(ShooterSubsystemConstants.FLYWHEEL_POSITION_TOLERANCE);
         //Call setVelocity to tell the REV controller how fast you want to get to the target position
         flyWheelMotorBottom.setVelocity(ShooterSubsystemConstants.FLYWHEEL_VELOCITY_TICKS_PER_S);
         flyWheelMotorBottom.setVelocity(ShooterSubsystemConstants.FLYWHEEL_VELOCITY_TICKS_PER_S);
