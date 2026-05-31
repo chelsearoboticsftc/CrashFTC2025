@@ -234,7 +234,7 @@ public class FarAutonBlueVersionTwo extends LinearOpMode {
         );
 
 
-        AutoEndPose = drive.localizer.getPose();
+        AutoEndPose = new Pose2d(0,0,Math.toRadians(-52));
         telemetry.addData("Vaughn Value", AutoEndPose);
         telemetry.update();
     }

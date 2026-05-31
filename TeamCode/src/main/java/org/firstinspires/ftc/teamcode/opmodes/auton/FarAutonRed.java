@@ -141,18 +141,18 @@ public class FarAutonRed extends LinearOpMode {
 //
 //        shooter.prime(0, 0);
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(0, 0, Math.toRadians(-83)))
+                drive.actionBuilder(new Pose2d(0, 0, Math.toRadians(0)))
                         .lineToY(-10)
                         .build()
         );
 
         Actions.runBlocking(
-                drive.actionBuilder(new Pose2d(0, -10, Math.toRadians(-83)))
+                drive.actionBuilder(new Pose2d(0, -10, Math.toRadians(0)))
                         .build()
         );
 
-        AutoEndPose = drive.localizer.getPose();
-        telemetry.addData("AutoEndPose", AutoEndPose);
+        AutoEndPose = new Pose2d(0,0,Math.toRadians(0));
+        telemetry.addData("Vaughn Value", AutoEndPose);
         telemetry.update();
         }
     }

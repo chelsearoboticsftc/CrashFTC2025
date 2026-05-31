@@ -152,7 +152,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
             }
 
             if (gamepad2.leftBumperWasReleased()) {
-                smartShooter.setMotorVelocity(1200);
+                smartShooter.setMotorVelocity(1000);
                 shooter.moveHood(0.4);
             }
 
@@ -162,7 +162,7 @@ public class RRfieldCentricDrive extends LinearOpMode {
 
             }
             if (gamepad2.rightBumperWasReleased()) {
-                smartShooter.setMotorVelocity(1200);
+                smartShooter.setMotorVelocity(1000);
                 shooter.moveHood(0.4);
             }
 

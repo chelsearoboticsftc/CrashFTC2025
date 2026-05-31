@@ -44,7 +44,7 @@ public class FarAutonBlue extends LinearOpMode {
 
         if (isStopRequested()) return;
         shooter.moveHood(0.325);
-        smartShooter.shoot((25 + limelight.getresult().getBotposeAvgDist()));
+        smartShooter.shoot((limelight.getresult().getBotposeAvgDist()));
 
         Thread.sleep(2000);
         //telemetry.addData("Pose2d that the limelight gives", botpose);
@@ -227,7 +227,7 @@ public class FarAutonBlue extends LinearOpMode {
         );
 
 
-        AutoEndPose = drive.localizer.getPose();
+        AutoEndPose = new Pose2d(0,0,Math.toRadians(0));
         telemetry.addData("Vaughn Value", AutoEndPose);
         telemetry.update();
     }

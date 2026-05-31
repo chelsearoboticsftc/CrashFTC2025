@@ -17,7 +17,6 @@ import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
-
 @Autonomous
 public class CloseAutoRedNewMay2026 extends LinearOpMode {
 
@@ -29,7 +28,7 @@ public class CloseAutoRedNewMay2026 extends LinearOpMode {
         SampleLimelight limelight = new SampleLimelight(hardwareMap);
         SmartShooter smartShooter = new SmartShooter(hardwareMap);
         drive.localizer.setPose(new Pose2d(0, 0 , 45));
-        shooter.prime(0.325, 0.70);
+        shooter.prime(0.35, 0.65);
         double ET;
         double start;
 
@@ -87,6 +86,7 @@ Actions.runBlocking(
                                 .build()
 
         );
+
         //This is the code that shoots the balls AGAIN (HOLY TUFF SQUARED)
         start = getRuntime();
         ET = 0;
@@ -121,8 +121,15 @@ Actions.runBlocking(
         sleep(200);
         intake.setIntakePower(1);
 
+        Actions.runBlocking(
+                drive.actionBuilder(new Pose2d(-25,0, Math.toRadians(50)))
+                        .strafeTo(new Vector2d(-25, -20))
+                        .build()
+
+        );
+
         //Takes The Pose For RRfieldCentricDrive
-        AutoEndPose = drive.localizer.getPose();
+        AutoEndPose = new Pose2d(0,0,Math.toRadians(-50));
         telemetry.addData("Vaughn Value", AutoEndPose);
         telemetry.update();
 

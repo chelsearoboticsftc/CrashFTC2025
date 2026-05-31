@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleLimelight;
@@ -121,8 +122,17 @@ public class CloseAutoBlueNewMay2026 extends LinearOpMode {
         sleep(200);
         intake.setIntakePower(1);
 
+        Actions.runBlocking(
+                drive.actionBuilder(new Pose2d(-14,0, Math.toRadians(-46)))
+                        .strafeTo(new Vector2d(-14, 15))
+                        .build()
+
+        );
+
         //Takes The Pose For RRfieldCentricDrive
-        AutoEndPose = drive.localizer.getPose();
+       //AutoEndPose = drive.localizer.getPose();
+        //telemetry.addData("Vaughn Value", AutoEndPose);
+        AutoEndPose = new Pose2d(0,0, Math.toRadians(45));
         telemetry.addData("Vaughn Value", AutoEndPose);
         telemetry.update();
     }
